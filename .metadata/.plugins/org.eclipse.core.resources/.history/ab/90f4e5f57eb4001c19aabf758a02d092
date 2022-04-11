@@ -1,0 +1,27 @@
+/*
+ * menus.c
+ *
+ *  Created on: 4 abr. 2022
+ *      Author: Jony
+ */
+#include <stdio.h>
+#include <stdlib.h>
+#include "menus.h"
+#include "validaciones.h"
+
+int menu(){
+	int opcion;
+	printf(" \t ..[MENU AGENCIA DE VIAJES]..\n");
+	printf(" \t ============================\n\n");
+	printf("  [1]  Ingresar Kilometro.\n");
+	printf("  [2]  Ingresar Precio de Vuelos.\n");
+	printf("  [3]  Calcular todos los costos.\n");
+	printf("  [4]  Informar resultados.\n");
+	printf("  [5]  Carga forzada de datos.\n");
+	printf("  [6]  Salir.\n\n");
+	printf("________________________________________\n\n");
+
+	enteroEntreDos("Ingrese una opciones del menu",&opcion,1,6);
+	return opcion;
+}
+

@@ -1,0 +1,18 @@
+/*
+ * calculos.h
+ *
+ *  Created on: 5 abr. 2022
+ *      Author: Jony
+ */
+
+#ifndef CALCULOS_H_
+#define CALCULOS_H_
+
+
+
+#endif /* CALCULOS_H_ */
+int calcularCostos(int kilometros, float precioLatam, float precioAeroL, float costosLatam[], float costosAeroL[], float* diferencia);
+float conDevito(float precio);
+float conCredito(float precio);
+float conBitcoins(float precio);
+int diferenciaLatamAeroL(float precioLatam, float precioAeroL,float* diferencia);

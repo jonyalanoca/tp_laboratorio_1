@@ -1,0 +1,42 @@
+/*
+ ============================================================================
+ Name        : test.c
+ Author      : 
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#define TAM 5
+int main(void) {
+	setbuf(stdout,NULL);
+	int numeros[TAM];
+	int bandera =0;
+	int numeroMayor;
+	int mayorPosicion;
+	int cantidad=0;
+	for(int i =0; i<TAM;i++){
+		printf("Ingrese un numero: \n");
+		scanf("%i", numeros[i]);
+		if(bandera==0 || i>numeroMayor){
+			bandera=1;
+			numeroMayor=i;
+		}
+	}
+	for(int i=0; i<TAM;i++){
+		if(numeroMayor==numeros[i]){
+			mayorPosicion=i;
+			cantidad++;
+		}
+	}
+	printf("El numero mayor ea: %d\n", numeroMayor);
+	printf("Se repite: %d\n", cantidad);
+	printf("Su posicion es: %d\n", mayorPosicion);
+	///printf("El numero mayor ea: %d\n", numeroMayor);
+
+
+	return EXIT_SUCCESS;
+}

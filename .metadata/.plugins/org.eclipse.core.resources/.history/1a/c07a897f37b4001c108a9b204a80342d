@@ -1,0 +1,32 @@
+/*
+ ============================================================================
+ Name        : TP_1.c
+ Author      : Alanoca Aduviri Jonathan Gerardo
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int menu();
+int main(void) {
+	setbuf(stdout,NULL);
+	switch(menu()){
+	case 1:
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	case 4:
+		break;
+	}
+	return EXIT_SUCCESS;
+}
+int menu(){
+	printf("%c", 67);
+	return 4;
+}
