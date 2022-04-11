@@ -57,7 +57,7 @@ int main(void) {
 							volver='n';
 						break;
 					}
-				}while(volver=='s');
+				}while((!precioAeroL || !precioLatam )&& volver=='s');
 				printf("Se guardaron los cambios.\n");
 				volver='s';
 				break;
