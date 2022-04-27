@@ -1,0 +1,65 @@
+/*
+ ============================================================================
+ Name        : TP_[2].c
+ Author      : Alanoca Aduviri Jonathan Gerardo (Div-1A)
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "menus.h"
+#include "otros.h"
+#include "ArrayPassenger.h"
+#define TAM 2000
+
+int main(void) {
+	setbuf(stdout,NULL);
+	Passenger pasajeros[TAM];
+	char estado[3][10]={"Activo","Cancelado","Demorado"};
+	printf("%s", estado[2]);
+
+	int id=1000;
+	char name[TAM_NAME];
+	char lastName[TAM_NAME];
+	float price;
+	char flycode[TAM_FLY];
+	int typePassenger;
+
+	if(initPassengers(pasajeros,TAM)==-1){
+		printf("Hubo un error con los punteros o el tanio.\n");
+	}
+	char salir='n';
+	do{
+		switch(menu()){
+		case 1:
+			validarDatos(name, lastName, &price, flycode, &typePassenger, TAM_NAME, TAM_FLY);
+			if(!addPassenger(pasajeros, TAM, id, name, lastName, price,typePassenger,flycode)){
+				id++;
+			}else{
+				printf("Hubo un error al validar los punteros.\n");
+			}
+			printfPassengers(pasajeros, TAM, estado);
+			break;
+		case 2:
+			//modificar
+			break;
+		case 3:
+			//baja
+			break;
+		case 4:
+			//informes
+			break;
+		case 5:
+			if(!cerrar(&salir)){
+				printf("Hubo un problema con la validacion.\n");
+			}
+			break;
+		}
+		system("pause");
+		system("cls");
+	}while(salir!='s');
+	return EXIT_SUCCESS;
+}

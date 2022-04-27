@@ -1,0 +1,83 @@
+/*
+ ============================================================================
+ Name        : TP_[2].c
+ Author      : Alanoca Aduviri Jonathan Gerardo (Div-1A)
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "menus.h"
+#include "otros.h"
+#include "ArrayPassenger.h"
+#include "validaciones.h"
+
+#define TAM 2000
+
+int main(void) {
+	setbuf(stdout,NULL);
+	Passenger pasajeros[TAM]={
+			{1001,"Jonathan","Alanoca",12000,"asdf123",1,1,0},
+			{1002,"Gerardo","Peres",15000,"asdf1263",3,1,0},
+			{1003,"Esteban","Alanoca",14000,"asdf723",2,1,0},
+			{1004,"Carlos","Hernandez",12000,"adf123",2,3,0},
+			{1005,"Juan","Alanoca",10000,"asdf12y3",1,3,0},
+	};
+
+	int id=1006;
+	char name[TAM_NAME];
+	char lastName[TAM_NAME];
+	float price;
+	char flycode[TAM_FLY];
+	int typePassenger;
+
+	char salir='n';
+	int aux;
+	if(initPassengers(pasajeros,TAM)==-1){
+		printf("Hubo un error con los punteros o el tanio.\n");
+	}
+
+	do{
+		switch(menu()){
+		case 1:
+			validarDatos(name, lastName, &price, flycode, &typePassenger, TAM_NAME, TAM_FLY);
+			if(!addPassenger(pasajeros, TAM, id, name, lastName, price,typePassenger,flycode)){
+				id++;
+			}else{
+				printf("Hubo un error al validar los punteros.\n");
+			}
+			break;
+		case 2:
+			printfPassengers(pasajeros, TAM);
+			cargarValidarEntero("Ingrese el id del pasajero a remover",&id);
+			aux=menuModificar();
+			if(modificarPasajero(pasajeros, TAM, id, aux, TAM_NAME, TAM_FLY)==-1){
+				printf("Error: puntero NULL o len menor a cero.\n");
+			}
+			break;
+		case 3:
+			printfPassengers(pasajeros, TAM);
+			cargarValidarEntero("Ingrese el id del pasajero a remover",&id);
+			if(removePassenger(pasajeros, TAM, id)==-1){
+				printf("Error: puntero NULL o len menor a cero.\n");
+			}
+			break;
+		case 4:
+			if(informes(pasajeros, TAM)==-1){
+				printf("Error: puntero NULL o len menor a cero.\n");
+			}
+			break;
+		case 5:
+			if(!cerrar(&salir)){
+				printf("Hubo un problema con la validacion.\n");
+			}
+			break;
+		}
+		system("pause");
+		system("cls");
+	}while(salir!='s');
+	return EXIT_SUCCESS;
+}

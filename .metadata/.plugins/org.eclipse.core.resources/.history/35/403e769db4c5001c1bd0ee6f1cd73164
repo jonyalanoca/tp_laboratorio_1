@@ -1,0 +1,26 @@
+/*
+ * informes.h
+ *
+ *  Created on: 26 abr. 2022
+ *      Author: Jony
+ */
+
+#ifndef INFORMES_H_
+#define INFORMES_H_
+typedef struct{
+	int id;
+	char name[TAM_NAME];
+	char lastName[TAM_NAME];
+	float price;
+	char flycode[TAM_FLY];
+	int typePassenger;
+	int statusFlight;
+	int isEmpty;
+}Passenger;
+
+
+#endif /* INFORMES_H_ */
+
+int informes(Passenger* list, int len);
+int sortPassengers(Passenger* list, int len, int order);
+int sortPassengersByCode(Passenger* list, int len, int order);

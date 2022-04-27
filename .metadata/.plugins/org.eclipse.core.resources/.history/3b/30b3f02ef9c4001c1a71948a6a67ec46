@@ -1,0 +1,23 @@
+/*
+ * validaciones.h
+ *
+ *  Created on: 25 abr. 2022
+ *      Author: Jony
+ */
+
+#ifndef VALIDACIONES_H_
+#define VALIDACIONES_H_
+
+
+
+#endif /* VALIDACIONES_H_ */
+int cargarValidarCharEntreDos(char mensaje[],char* varChar, char letra1, char letra2);
+int cargarValidarChar(char mensaje[], char* letra);
+int cargarValidarCadena(char mensaje[], int tam, char string[]);
+int cargarValidarEntero(char mensaje[],int* pNumero);
+int cargarValidarEnteroPositivo(char mensaje[],int* pNumero);
+int cargarValidarDecimal(char mensaje[], float* varNumero);
+int stringSoloNumeros(int inicio, char nums[], int* validado);
+int borrarBarraN(char string[]);
+int capitalizar(char varString[]);
+int enteroEnRango(char mensaje[], int* pNumero,int numero1, int numero2);

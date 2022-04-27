@@ -1,0 +1,39 @@
+/*
+ * ArrayPassenger.h
+ *
+ *  Created on: 25 abr. 2022
+ *      Author: Jony
+ */
+
+#ifndef ARRAYPASSENGER_H_
+#define ARRAYPASSENGER_H_
+
+#define TAM_NAME 51
+#define TAM_FLY 10
+typedef struct{
+	int id;
+	char name[TAM_NAME];
+	char lastName[TAM_NAME];
+	float price;
+	char flycode[TAM_FLY];
+	int typePassenger;
+	int statusFlight;
+	int isEmpty;
+}Passenger;
+
+#endif /* ARRAYPASSENGER_H_ */
+
+int initPassengers(Passenger* list, int len);
+int buscarLibre(Passenger* list, int len,int* idLibre);
+int validarDatos(char name[], char lastName[], float* price, char flycode[], int* typePassenger, int tamName, int tamFly);
+int addPassenger(Passenger* list, int len, int id, char name[],char lastName[],float price,int typePassenger, char flycode[]);
+void printfPassenger(Passenger pasajero);
+int printfPassengers(Passenger pasajeros[], int length);
+int findPassengerById(Passenger* list, int len,int id);
+int removePassenger(Passenger* list, int len, int id);
+int modificarPasajero(Passenger* list, int len, int id, int opcion,int tamName, int tamFly);
+
+int informes(Passenger* list, int len);
+int sortPassengers(Passenger* list, int len, int order);
+int sortPassengersByCode(Passenger* list, int len, int order);
+int informarPrecioPromedio(Passenger* list, int len);
