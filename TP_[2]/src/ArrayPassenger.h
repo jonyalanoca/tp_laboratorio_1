@@ -49,7 +49,7 @@ int buscarLibreUOcupado(Passenger* list, int len, int citerio);
 /// @param tamName
 /// @param tamFly
 /// @return retorna -1 para puntero nulo, 0 si todo salio bien.
-int validarDatos(char name[], char lastName[], float* price, char flycode[], int* typePassenger, int tamName, int tamFly);
+int validarDatos(int id, char name[], char lastName[], float* price, char flycode[], int* typePassenger, int tamName, int tamFly);
 /** \brief add in a existing list of passengers the values received as parameters
 * in the first empty position
 * \param list passenger*

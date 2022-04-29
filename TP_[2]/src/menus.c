@@ -53,7 +53,7 @@ int menuInformes(void){
 	printf("========================================\n\n");
 	printf("  [1]  Litas pasajeros.\n");
 	printf("  [2]  Listar por apellido y tipo de pasajero.\n");
-	printf("  [3]  Listar por codigo de vuelo y estado de vulelo (ACTIVO).\n");
+	printf("  [3]  Listar por codigo de vuelo y estado de vuelo (ACTIVO).\n");
 	printf("  [4]  Listar pasajeros superando el precio promedio.\n");
 	printf("________________________________________\n\n");
 

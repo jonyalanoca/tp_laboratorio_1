@@ -36,11 +36,20 @@ int main(void) {
 	do{
 		switch(menu()){
 		case 1:
-			validarDatos(name, lastName, &price, flycode, &typePassenger, TAM_NAME, TAM_FLY);
-			if(!addPassenger(pasajeros, TAM, id, name, lastName, price,typePassenger,flycode)){
-				id++;
-			}else{
+			switch(validarDatos(id,name, lastName, &price, flycode, &typePassenger, TAM_NAME, TAM_FLY)){
+			case 0:
 				printf("Hubo un error al validar los punteros.\n");
+				break;
+			case 1:
+				printf("No se guardaron los cambios.\n");
+				break;
+			case 2:
+				if(!addPassenger(pasajeros, TAM, id, name, lastName, price,typePassenger,flycode)){
+					id++;
+				}else{
+					printf("Hubo un error al validar los punteros.\n");
+				}
+				break;
 			}
 			break;
 		case 2:

@@ -24,16 +24,51 @@ int initPassengers(Passenger* list, int len){
 	return todoOk;
 }
 
-int validarDatos(char name[], char lastName[], float* price, char flycode[], int* typePassenger, int tamName, int tamFly){
+int validarDatos(int id,char name[], char lastName[], float* price, char flycode[], int* typePassenger, int tamName, int tamFly){
 	int todoOk=0;
+	int seccion=0;
+	char confirmar;
+	Passenger aux={id,"-","-",0,"-",0,0,0};
 	if(name!=NULL && lastName!=NULL && price!=NULL && flycode!=NULL && typePassenger!=NULL && tamName>0 && tamFly>0){
-		cargarValidarCadena("Ingrese el nombre del pasajero",tamName,name);
-		cargarValidarCadena("Ingrese el apellido del pasajero",tamName,lastName);
-		cargarValidarDecimalPositivo("Ingrese el precio", price);
-		cargarValidarAlfaNumerico("Ingrese el codigo de vuelo", tamFly, flycode);
-		enteroEnRango("Ingrese en que clase viaja(1/2/3)",typePassenger, 1,3);
+		do{
+			system("cls");
+			printf(".......................................................................\n");
+			printf("  ID       NOMBRE     APELLIDO      PRECIO  CLASE     CODIGO     ESTADO\n");
+			printfPassenger(aux);
+			printf(".......................................................................\n");
+			switch(seccion){
+			case 0:
+				cargarValidarCadena("Ingrese el nombre del pasajero",tamName,name);
+				strcpy(aux.name,name);
+				break;
+			case 1:
+				cargarValidarCadena("Ingrese el apellido del pasajero",tamName,lastName);
+				strcpy(aux.lastName,lastName);
+				break;
+			case 2:
+				cargarValidarDecimalPositivo("Ingrese el precio", price);
+				aux.price=*price;
+				break;
+			case 3:
+				enteroEnRango("Ingrese en que clase viaja(1/2/3)",typePassenger, 1,3);
+				aux.typePassenger=*typePassenger;
+				break;
+			case 4:
+				cargarValidarAlfaNumerico("Ingrese el codigo de vuelo", tamFly, flycode);
+				strcpy(aux.flycode, flycode);
+				break;
+			}
+			seccion++;
+		}while(seccion<6);
+		cargarValidarCharEntreDos("¿Desea guardar el pasajero?.Porfavor confirme si o no (s/n)",&confirmar,'s','n');
+		if(confirmar=='s'){
+			todoOk=2;
+		}
+		else{
+			todoOk=1;
+		}
 
-		todoOk=1;
+
 	}
 	return todoOk;
 }
@@ -79,6 +114,9 @@ int buscarLibreUOcupado(Passenger* list, int len,int criterio){// 1-libre, 0-Ocu
 void printfPassenger(Passenger pasajero){
 	printf("%4d %12s %12s  $%9.2f %6d %10s",pasajero.id, pasajero.name,pasajero.lastName, pasajero.price, pasajero.typePassenger, pasajero.flycode);
 	switch(pasajero.statusFlight){
+	case 0:
+		printf("%11s\n","SIN DEF.");
+		break;
 		case 1:
 			printf("%11s\n","ACTIVO");
 			break;
