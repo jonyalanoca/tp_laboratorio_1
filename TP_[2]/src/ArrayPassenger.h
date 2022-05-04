@@ -7,7 +7,7 @@
 
 #ifndef ARRAYPASSENGER_H_
 #define ARRAYPASSENGER_H_
-
+#include "VueloEstado.h"
 #define TAM_NAME 51
 #define TAM_FLY 10
 typedef struct{
@@ -38,18 +38,6 @@ int initPassengers(Passenger* list, int len);
 /// @param citerio
 /// @return retorna -1 si la lista esta llena o no se valido los punteros y/o tam<0
 int buscarLibreUOcupado(Passenger* list, int len, int citerio);
-/// @fn int validarDatos(char[], char[], float*, char[], int*, int, int)
-/// @brief pide y valida los datos necesarios, es un paso previo a agregar los datos a nuestro array de estructura.
-///
-/// @param name
-/// @param lastName
-/// @param price
-/// @param flycode
-/// @param typePassenger
-/// @param tamName
-/// @param tamFly
-/// @return retorna -1 para puntero nulo, 0 si todo salio bien.
-int validarDatos(int id, char name[], char lastName[], float* price, char flycode[], int* typePassenger, int tamName, int tamFly);
 /** \brief add in a existing list of passengers the values received as parameters
 * in the first empty position
 * \param list passenger*
@@ -62,19 +50,23 @@ int validarDatos(int id, char name[], char lastName[], float* price, char flycod
 * \param flycode[] char
 * \return int Return (-1) if Error [Invalid length or NULL pointer or without free space] - (0) if Ok
 */
-int addPassenger(Passenger* list, int len, int id, char name[],char lastName[],float price,int typePassenger, char flycode[]);
+int addPassenger(Passenger* list, int len, int id, char name[],char lastName[],float price,int typePassenger, char flycode[], int statusFly);
 /// @fn void printfPassenger(Passenger)
 /// @brief recive una estructura y lo muetra en fila
+///param estados eVueloEstado*
+/// param lenEstados int
 ///
 /// @param pasajero
-void printfPassenger(Passenger pasajero);
+void printfPassenger(Passenger pasajero, eVueloEstado estados[], int lenEstados);
 /** \brief print the content of passengers array
 *
 * \param list Passenger*
 * \param length int
+* \param estados eVueloEstado*
+* \param lenEstados int
 * \return int
 */
-int printfPassengers(Passenger pasajeros[], int length);
+int printfPassengers(Passenger pasajeros[], int length, eVueloEstado estados[], int lenEstados);
 /** \brief find a Passenger by Id en returns the index position in array.
 *
 * \param list Passenger*
@@ -88,9 +80,11 @@ int findPassengerById(Passenger* list, int len,int id);
 * \param list Passenger*
 * \param len int
 * \param id int
+* param estados eVueloEstado*
+/// param lenEstados int
 * \return int Return (-1) if Error [Invalid length or NULL pointer or if can't find a passenger] - (0) if Ok
 */
-int removePassenger(Passenger* list, int len, int id);
+int removePassenger(Passenger* list, int len, int id, eVueloEstado estados[], int lenEstados);
 /// @fn int modificarPasajero(Passenger*, int, int, int, int)
 /// @brief funcion para modificar y actualizar los datos(independientes) de un pasajero. cuenta con su propio submenu y valida los datos antes de cargar.
 ///
@@ -99,37 +93,48 @@ int removePassenger(Passenger* list, int len, int id);
 /// @param id
 /// @param tamName
 /// @param tamFly
+/// param estados eVueloEstado*
+/// param lenEstados int
 /// @return retorna -1 para puntero nulo o len invalido, 0 si todo salio bien.
-int modificarPasajero(Passenger* list, int len, int id,int tamName, int tamFly);
+int modificarPasajero(Passenger* list, int len, int id,int tamName, int tamFly, eVueloEstado estados[], int lenEstados);
 /// @fn int informes(Passenger*, int)
 /// @brief cuenta con un submenu y llama a las fuciones para realizar los distintos inoformes
 ///
 /// @param list
 /// @param len
+/// param estados eVueloEstado*
+/// param lenEstados int
 /// @return retorna -1 para puntero nulo o len invalido, 0 si todo salio bien.
-int informes(Passenger* list, int len);
+int informes(Passenger* list, int len, eVueloEstado estados[], int lenEstados);
 /** \brief Sort the elements in the array of passengers, the argument order
 indicate UP or DOWN order
 *
 * \param list Passenger*
 * \param len int
+* param estados eVueloEstado*
+/// param lenEstados int
 * \param order int [1] indicate UP - [0] indicate DOWN
 * \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
 */
-int sortPassengers(Passenger* list, int len, int order);
+int sortPassengers(Passenger* list, int len, int order, eVueloEstado estados[], int lenEstados);
 /** \brief Sort the elements in the array of passengers, the argument order
 indicate UP or DOWN order
 *
 * \param list Passenger*
 * \param len int
+* param estados eVueloEstado*
+/// param lenEstados int
 * \param order int [1] indicate UP - [0] indicate DOWN
 * \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
 */
-int sortPassengersByCode(Passenger* list, int len, int order);
+int sortPassengersByCode(Passenger* list, int len, int order, eVueloEstado estados[], int lenEstados);
 /// @fn int informarPrecioPromedio(Passenger*, int)
 /// @brief infoma la suma total de precios, precio promedio y pasajeros que superen ese precio promedio.Muetra un pequeño informe.
 ///
 /// @param list
 /// @param len
+/// param estados eVueloEstado*
+/// param lenEstados int
 /// @return retorna -1 para puntero nulo o len invalido, 0 si todo salio bien.
-int informarPrecioPromedio(Passenger* list, int len);
+int informarPrecioPromedio(Passenger* list, int len, eVueloEstado estados[], int lenEstados);
+

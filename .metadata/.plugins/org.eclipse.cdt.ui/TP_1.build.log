@@ -1,7 +1,5 @@
-13:15:25 **** Incremental Build of configuration Debug for project TP_1 ****
-Info: Internal Builder is used for build
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_1.o" "..\\src\\TP_1.c" 
-gcc -o TP_1.exe "src\\TP_1.o" "src\\calculos.o" "src\\informes.o" "src\\menus.o" "src\\otros.o" "src\\validaciones.o" 
+14:23:02 **** Clean-only build of configuration Debug for project TP_1 ****
+rm -rf src/menus.o src/TP_1.o src/calculos.d src/otros.d src/calculos.o src/validaciones.o src/validaciones.d src/informes.d TP_1.exe src/TP_1.d src/informes.o src/menus.d src/otros.o 
 
-13:15:26 Build Finished. 0 errors, 0 warnings. (took 1s.140ms)
+14:23:05 Build Finished. 0 errors, 0 warnings. (took 3s.149ms)
 

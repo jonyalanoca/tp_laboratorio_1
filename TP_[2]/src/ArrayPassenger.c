@@ -11,6 +11,7 @@
 #include "validaciones.h"
 #include "otros.h"
 #include "menus.h"
+#include "VueloEstado.h"
 
 
 int initPassengers(Passenger* list, int len){
@@ -23,56 +24,7 @@ int initPassengers(Passenger* list, int len){
 	}
 	return todoOk;
 }
-
-int validarDatos(int id,char name[], char lastName[], float* price, char flycode[], int* typePassenger, int tamName, int tamFly){
-	int todoOk=0;
-	int seccion=0;
-	char confirmar;
-	Passenger aux={id,"-","-",0,"-",0,0,0};
-	if(name!=NULL && lastName!=NULL && price!=NULL && flycode!=NULL && typePassenger!=NULL && tamName>0 && tamFly>0){
-		do{
-			system("cls");
-			printf(".......................................................................\n");
-			printf("  ID       NOMBRE     APELLIDO      PRECIO  CLASE     CODIGO     ESTADO\n");
-			printfPassenger(aux);
-			printf(".......................................................................\n");
-			switch(seccion){
-			case 0:
-				cargarValidarCadena("Ingrese el nombre del pasajero",tamName,name);
-				strcpy(aux.name,name);
-				break;
-			case 1:
-				cargarValidarCadena("Ingrese el apellido del pasajero",tamName,lastName);
-				strcpy(aux.lastName,lastName);
-				break;
-			case 2:
-				cargarValidarDecimalPositivo("Ingrese el precio", price);
-				aux.price=*price;
-				break;
-			case 3:
-				enteroEnRango("Ingrese en que clase viaja(1/2/3)",typePassenger, 1,3);
-				aux.typePassenger=*typePassenger;
-				break;
-			case 4:
-				cargarValidarAlfaNumerico("Ingrese el codigo de vuelo", tamFly, flycode);
-				strcpy(aux.flycode, flycode);
-				break;
-			}
-			seccion++;
-		}while(seccion<6);
-		cargarValidarCharEntreDos("¿Desea guardar el pasajero?.Porfavor confirme si o no (s/n)",&confirmar,'s','n');
-		if(confirmar=='s'){
-			todoOk=2;
-		}
-		else{
-			todoOk=1;
-		}
-
-
-	}
-	return todoOk;
-}
-int addPassenger(Passenger* list, int len, int id, char name[],char lastName[],float price,int typePassenger, char flycode[]){
+int addPassenger(Passenger* list, int len, int id, char name[],char lastName[],float price,int typePassenger, char flycode[], int statusFly){
 	int todoOk=-1;
 	int idLibre;
 	if(list!=NULL && len>0 && name!=NULL && lastName!=NULL && flycode!=NULL){
@@ -89,15 +41,15 @@ int addPassenger(Passenger* list, int len, int id, char name[],char lastName[],f
 			list[idLibre].price=price;
 			list[idLibre].typePassenger=typePassenger;
 			strcpy(list[idLibre].flycode, flycode);
-			list[idLibre].statusFlight=numeroRandom(1,3);
+			list[idLibre].statusFlight=statusFly;
 			list[idLibre].isEmpty=0;
-			printf(".......................................\n");
-			printf("Se guardaron los datos con exito.\n");
+
 			todoOk=0;
 		}
 	}
 	return todoOk;
 }
+
 int buscarLibreUOcupado(Passenger* list, int len,int criterio){// 1-libre, 0-Ocupado
 	int todoOk=-1;
 	if(list!=NULL && len>0){
@@ -111,25 +63,11 @@ int buscarLibreUOcupado(Passenger* list, int len,int criterio){// 1-libre, 0-Ocu
 	return todoOk;
 }
 
-void printfPassenger(Passenger pasajero){
-	printf("%4d %12s %12s  $%9.2f %6d %10s",pasajero.id, pasajero.name,pasajero.lastName, pasajero.price, pasajero.typePassenger, pasajero.flycode);
-	switch(pasajero.statusFlight){
-	case 0:
-		printf("%11s\n","SIN DEF.");
-		break;
-		case 1:
-			printf("%11s\n","ACTIVO");
-			break;
-		case 2:
-			printf("%11s\n","CANCELADO");
-			break;
-		case 3:
-			printf("%11s\n","DEMORADO");
-			break;
+void printfPassenger(Passenger pasajero, eVueloEstado estados[], int lenEstados){
+	printf("%4d %12s %12s  $%9.2f %6d %10s %10s\n",pasajero.id, pasajero.name,pasajero.lastName, pasajero.price, pasajero.typePassenger, pasajero.flycode, estados[buscarIndexPorId(estados,lenEstados, pasajero.statusFlight,1)].estado);
 
-	}
 }
-int printfPassengers(Passenger pasajeros[], int length){
+int printfPassengers(Passenger pasajeros[], int length,eVueloEstado estados[], int lenEstados){
 	int todoOk=-1;
 	if(pasajeros!=NULL && length>0){
 		system("cls");
@@ -137,7 +75,7 @@ int printfPassengers(Passenger pasajeros[], int length){
 		printf("  ID       NOMBRE     APELLIDO      PRECIO  CLASE     CODIGO     ESTADO\n");
 		for(int i=0; i<length;i++){
 			if(pasajeros[i].isEmpty==0){
-				printfPassenger(pasajeros[i]);
+				printfPassenger(pasajeros[i], estados, lenEstados);
 			}
 		}
 		todoOk=0;
@@ -148,27 +86,28 @@ int findPassengerById(Passenger* list, int len,int id){
 	int todoOk=-1;
 	if(list!=NULL && len>0){
 		for(int i=0; i<len;i++){
-			if(list[i].id==id){
+			if(list[i].isEmpty==0 && list[i].id==id){
 				todoOk=i;
 			}
 		}
 	}
 	return todoOk;
 }
-int removePassenger(Passenger* list, int len, int id){
+int removePassenger(Passenger* list, int len, int id, eVueloEstado estados[], int lenEstados){
 	int todoOk=-1;
 	int auxId;
 	char confirmo;
-	if(list!=NULL && len>0){
+	if(list!=NULL && len>0 && estados!=NULL && lenEstados>0){
 		auxId=findPassengerById(list, len, id);
 		if(auxId==-1){
 			printf("No se encontro el id seleccionado.\n");
 		}else{
 			system("cls");
+			printf("%d",auxId);
 			printf("\nATENCION\nEsta por borrar el siguiente registro:\n");
 			printf(".......................................................................\n");
 			printf("  ID       NOMBRE     APELLIDO      PRECIO  CLASE     CODIGO     ESTADO\n");
-			printfPassenger(list[auxId]);
+			printfPassenger(list[auxId], estados, lenEstados);
 			cargarValidarCharEntreDos("Porfavor confirme si o no (s/n)",&confirmo,'s','n');
 			if(confirmo=='s'){
 				list[auxId].isEmpty=1;
@@ -182,9 +121,11 @@ int removePassenger(Passenger* list, int len, int id){
 	}
 	return todoOk;
 }
-int modificarPasajero(Passenger* list, int len, int id,int tamName, int tamFly){
+int modificarPasajero(Passenger* list, int len, int id,int tamName, int tamFly, eVueloEstado estados[], int lenEstados){
 	int todoOk=-1;
 	int index;
+	int auxIdEstado;
+	int auxEntero;
 	if(list!=NULL && len>0){
 		index=findPassengerById(list, len, id);
 		if(index==-1){
@@ -203,13 +144,19 @@ int modificarPasajero(Passenger* list, int len, int id,int tamName, int tamFly){
 					cargarValidarDecimalPositivo("Ingrese el precio", &(list[index].price));
 					break;
 				case 4:
-					cargarValidarAlfaNumerico("Ingrese el codigo de vuelo", tamFly, list[index].flycode);
-					break;
-				case 5:
 					enteroEnRango("Ingrese en que clase viaja(1/2/3)",&(list[index].typePassenger), 1,3);
 					break;
-				case 6:
-					enteroEnRango("Ingrese el estado de vuelo (1-ACTIVO/2-CANCELADO/3-DEMORADO)",&(list[index].statusFlight), 1,3);
+				case 5:
+					printfEstados(estados, lenEstados);
+					do{
+						cargarValidarEntero("Ingrese el ID del del vuelo", &auxIdEstado);
+						auxEntero= buscarIndexPorId(estados, lenEstados, auxIdEstado,1);
+						if(auxEntero==-1){
+							printf("No se encontro el id. Vuelva a intentear.\n");
+						}
+					}while(auxEntero==-1);
+					strcpy(list[index].flycode,estados[auxEntero].codigoDeVuelo);
+					list[index].statusFlight=auxIdEstado;
 					break;
 			}
 			printf("Se modifico el usuario con exito.\n");
@@ -220,31 +167,31 @@ int modificarPasajero(Passenger* list, int len, int id,int tamName, int tamFly){
 	return todoOk;
 }
 
-int informes(Passenger* list, int len){
+int informes(Passenger* list, int len, eVueloEstado estados[], int lenEstados){
 	int todoOk=-1;
 	int auxEntero;
 	if(list!=NULL && len>0){
 		switch(menuInformes()){
 		case 1:
-			printfPassengers(list, len);
+			printfPassengers(list, len, estados, lenEstados);
 			break;
 		case 2:
 			auxEntero=ascendenteDescendente();
-			sortPassengers(list, len,auxEntero);
+			sortPassengers(list, len,auxEntero, estados, lenEstados);
 			break;
 		case 3:
 			auxEntero=ascendenteDescendente();
-			sortPassengersByCode(list, len,auxEntero);
+			sortPassengersByCode(list, len,auxEntero, estados, lenEstados);
 			break;
 		case 4:
-			informarPrecioPromedio(list, len);
+			informarPrecioPromedio(list, len, estados, lenEstados);
 			break;
 		}
 		todoOk=0;
 	}
 	return todoOk;
 }
-int sortPassengers(Passenger* list, int len, int order){
+int sortPassengers(Passenger* list, int len, int order, eVueloEstado estados[], int lenEstados){
 	int todoOk=-1;
 	Passenger aux;
 	if(list!=NULL && len>0){
@@ -276,12 +223,12 @@ int sortPassengers(Passenger* list, int len, int order){
 				}
 			}
 		}
-		printfPassengers(list, len);
+		printfPassengers(list, len, estados, lenEstados);
 		todoOk=0;
 	}
 	return todoOk;
 }
-int sortPassengersByCode(Passenger* list, int len, int order){
+int sortPassengersByCode(Passenger* list, int len, int order, eVueloEstado estados[], int lenEstados){
 	int todoOk=-1;
 	Passenger aux;
 	if(list!=NULL && len>0){
@@ -309,15 +256,16 @@ int sortPassengersByCode(Passenger* list, int len, int order){
 		printf(".......................................................................\n");
 		printf("  ID       NOMBRE     APELLIDO      PRECIO  CLASE     CODIGO     ESTADO\n");
 		for(int i=0; i<len;i++){
-			if(list[i].isEmpty==0 && list[i].statusFlight==1){
-				printfPassenger(list[i]);
+
+			if(list[i].isEmpty==0 && strcmp(estados[buscarIndexPorId(estados, lenEstados,list[i].statusFlight,1)].estado,"ACTIVO")==0){
+				printfPassenger(list[i], estados, lenEstados);
 			}
 		}
 		todoOk=0;
 	}
 	return todoOk;
 }
-int informarPrecioPromedio(Passenger* list, int len){
+int informarPrecioPromedio(Passenger* list, int len, eVueloEstado estados[], int lenEstados){
 	int todoOk=-1;
 	int contador=0;
 	float precioTotal=0;
@@ -345,10 +293,11 @@ int informarPrecioPromedio(Passenger* list, int len){
 		printf("  ID       NOMBRE     APELLIDO      PRECIO  CLASE     CODIGO     ESTADO\n");
 		for(int i=0; i<len;i++){
 			if(list[i].isEmpty==0 && list[i].price>=precioPromedio){
-				printfPassenger(list[i]);
+				printfPassenger(list[i], estados, lenEstados);
 			}
 		}
 		todoOk=0;
 	}
 	return todoOk;
 }
+

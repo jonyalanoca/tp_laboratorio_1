@@ -14,13 +14,14 @@ int menu(void){
 	printf(" \t..[MENU AGENCIA DE VIAJES]..\n");
 	printf("========================================\n\n");
 	printf("  [1]  Alta de pasajero.\n");
-	printf("  [2]  Modificar pasajero.\n");
-	printf("  [3]  Baja Pasajero.\n");
-	printf("  [4]  Informes.\n");
-	printf("  [5]  Salir.\n");
+	printf("  [2]  Forzar carga de pasajeros.\n");
+	printf("  [3]  Modificar pasajero.\n");
+	printf("  [4]  Baja Pasajero.\n");
+	printf("  [5]  Informes.\n");
+	printf("  [6]  Salir.\n");
 	printf("________________________________________\n\n");
 
-	if(!enteroEnRango("Ingrese una opciones del menu",&opcion,1,5)){
+	if(!enteroEnRango("Ingrese una opciones del menu",&opcion,1,6)){
 		printf("Algo ha salido mal.\n");
 	}
 	return opcion;
@@ -34,13 +35,13 @@ int menuModificar(void){
 	printf("  [1]  Modificar nombre.\n");
 	printf("  [2]  Modificar apellido.\n");
 	printf("  [3]  Modificar precio.\n");
-	printf("  [4]  Modificar codigo de vuelo.\n");
-	printf("  [5]  Modificar tipo de pasaje.\n");
-	printf("  [6]  Modificar estado de vuelo.\n");
+	printf("  [4]  Modificar tipo de pasaje.\n");
+	printf("  [5]  Modificar codigo de vuelo.\n");
+
 
 	printf("________________________________________\n\n");
 
-	if(!enteroEnRango("Ingrese una opciones del menu",&opcion,1,6)){
+	if(!enteroEnRango("Ingrese una opciones del menu",&opcion,1,5)){
 		printf("Algo ha salido mal.\n");
 	}
 	return opcion;
