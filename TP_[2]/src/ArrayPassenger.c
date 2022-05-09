@@ -103,7 +103,6 @@ int removePassenger(Passenger* list, int len, int id, eVueloEstado estados[], in
 			printf("No se encontro el id seleccionado.\n");
 		}else{
 			system("cls");
-			printf("%d",auxId);
 			printf("\nATENCION\nEsta por borrar el siguiente registro:\n");
 			printf(".......................................................................\n");
 			printf("  ID       NOMBRE     APELLIDO      PRECIO  CLASE     CODIGO     ESTADO\n");
