@@ -12,7 +12,7 @@
 int hardCodearTipos(eTipo tipos[],int tamT){
 	int todoOk=-1;
 	int id=1000;
-	char descripcion[3][20]={"FirstClass","ExecutiveClass","EconomyClass"};
+	char descripcion[3][20]={"EconomyClass","ExecutiveClass","FirstClass"};
 	if(tipos!=NULL && tamT>0){
 		for(int i =0; i<tamT;i++){
 			tipos[i].id=id;

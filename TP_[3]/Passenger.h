@@ -55,4 +55,12 @@ int Passenger_modificarPrecio(Passenger* pasajero);
 int Passenger_modificarTipoPasajero(Passenger* pasajero,eTipo tipos[], int tamT);
 int Passenger_modificarEstadoVuelo(Passenger* pasajero,eEstado estados[], int tamE);
 
+int compararPorId(void* pasajero1, void* pasajero2);
+int compararPorNombre(void* pasajero1, void* pasajero2);
+int compararPorApellido(void* pasajero1, void* pasajero2);
+int compararPorCodigo(void* pasajero1, void* pasajero2);
+int compararPorPrecio(void* pasajero1, void* pasajero2);
+int compararPorTipo(void* pasajero1, void* pasajero2);
+int compararPorEstado(void* pasajero1, void* pasajero2);
+
 #endif /* PASSENGER_H_ */

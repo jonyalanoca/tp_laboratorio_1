@@ -263,4 +263,81 @@ int Passenger_modificarEstadoVuelo(Passenger* pasajero,eEstado estados[], int ta
 }
 
 
+int compararPorId(void* pasajero1, void* pasajero2){
+	int auxReturn=0;
+	if(pasajero1!=NULL && pasajero2!=NULL){
+		if(((Passenger *)pasajero1)->id>((Passenger*)pasajero2)->id)
+		{
+		 auxReturn= 1;
+		}
+		if(((Passenger *)pasajero1)->id<((Passenger*)pasajero2)->id)
+		{
+		 auxReturn= -1;
+		}
+	}
+	return auxReturn;
+}
+int compararPorNombre(void* pasajero1, void* pasajero2){
+	int auxReturn=0;
+	if(pasajero1!=NULL && pasajero2!=NULL){
+		auxReturn=strcmp(((Passenger*)pasajero1)->nombre, ((Passenger*)pasajero2)->nombre);
+	}
+	return auxReturn;
+}
+int compararPorApellido(void* pasajero1, void* pasajero2){
+	int auxReturn=0;
+	if(pasajero1!=NULL && pasajero2!=NULL){
+		auxReturn=strcmp(((Passenger*)pasajero1)->apellido, ((Passenger*)pasajero2)->apellido);
+	}
+	return auxReturn;
+}
+int compararPorCodigo(void* pasajero1, void* pasajero2){
+	int auxReturn=0;
+	if(pasajero1!=NULL && pasajero2!=NULL){
+		auxReturn=strcmp(((Passenger*)pasajero1)->codigoVuelo, ((Passenger*)pasajero2)->codigoVuelo);
+	}
+	return auxReturn;
+}
 
+int compararPorPrecio(void* pasajero1, void* pasajero2){
+	int auxReturn=0;
+	if(pasajero1!=NULL && pasajero2!=NULL){
+		if(((Passenger *)pasajero1)->precio>((Passenger*)pasajero2)->precio)
+		{
+		 auxReturn= 1;
+		}
+		if(((Passenger *)pasajero1)->precio<((Passenger*)pasajero2)->precio)
+		{
+		 auxReturn= -1;
+		}
+	}
+	return auxReturn;
+}
+int compararPorTipo(void* pasajero1, void* pasajero2){
+	int auxReturn=0;
+	if(pasajero1!=NULL && pasajero2!=NULL){
+		if(((Passenger *)pasajero1)->tipoPasajero>((Passenger*)pasajero2)->tipoPasajero)
+		{
+		 auxReturn= 1;
+		}
+		if(((Passenger *)pasajero1)->tipoPasajero<((Passenger*)pasajero2)->tipoPasajero)
+		{
+		 auxReturn= -1;
+		}
+	}
+	return auxReturn;
+}
+int compararPorEstado(void* pasajero1, void* pasajero2){
+	int auxReturn=0;
+	if(pasajero1!=NULL && pasajero2!=NULL){
+		if(((Passenger *)pasajero1)->estadoVuelo>((Passenger*)pasajero2)->estadoVuelo)
+		{
+		 auxReturn= 1;
+		}
+		if(((Passenger *)pasajero1)->estadoVuelo<((Passenger*)pasajero2)->estadoVuelo)
+		{
+		 auxReturn= -1;
+		}
+	}
+	return auxReturn;
+}

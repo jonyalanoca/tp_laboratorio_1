@@ -13,7 +13,7 @@
 int hardCodearEstados(eEstado estados[],int tamE){
 	int todoOk=-1;
 	int id=5000;
-	char descripcion[4][20]={"Aterrizado","En Horario","Demorado", "En Vuelo"};
+	char descripcion[4][20]={"Aterrizado","Demorado","En Horario", "En Vuelo"};
 	if(estados!=NULL && tamE>0){
 		for(int i =0; i<tamE;i++){
 			estados[i].id=id;

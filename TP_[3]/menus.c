@@ -50,19 +50,23 @@ int menuModificar(void){
 	}
 	return opcion;
 }
-int menuInformes(void){
+int menuOrdenar(void){
 	int opcion;
 	system("cls");
 	printf("----------------------------------------\n");
-	printf(" \t..[MENU DE INFORMES]..\n");
+	printf(" \t..[MENU DE ORDENAMIENTO]..\n");
 	printf("========================================\n\n");
-	printf("  [1]  Litas pasajeros.\n");
-	printf("  [2]  Listar por apellido y tipo de pasajero.\n");
-	printf("  [3]  Listar por codigo de vuelo y estado de vuelo (ACTIVO).\n");
-	printf("  [4]  Listar pasajeros superando el precio promedio.\n");
+	printf("  [1]  Ordenar por id.\n");
+	printf("  [2]  Ordenar por Nombre.\n");
+	printf("  [3]  Ordenar por Apellido.\n");
+	printf("  [4]  Ordenar por precio.\n");
+	printf("  [5]  Ordenar por Codigo de vuelo.\n");
+	printf("  [6]  Ordenar por Tipo de pasajero.\n");
+	printf("  [7]  Ordenar por Estado de vuelo.\n");
+	printf("  [8]  Volver al menu principal.\n");
 	printf("________________________________________\n\n");
 
-	if(!enteroEnRango("Ingrese una opciones del menu",&opcion,1,4)){
+	if(!enteroEnRango("Ingrese una opciones del menu",&opcion,1,8)){
 		printf("Algo ha salido mal.\n");
 	}
 	return opcion;
@@ -73,13 +77,14 @@ int ascendenteDescendente(void){
 	printf("----------------------------------------\n");
 	printf(" \t..[TIPO DE ORDENAMIENTO]..\n");
 	printf("========================================\n\n");
-	printf("  [1]  Ordenar ascendente.\n");
-	printf("  [2]  Ordenar descendente\n");
+	printf("  [0]  Ordenar descendente.\n");
+	printf("  [1]  Ordenar ascendente\n");
 
 	printf("________________________________________\n\n");
 
-	if(!enteroEnRango("Ingrese una opciones del menu",&opcion,1,2)){
+	if(!enteroEnRango("Ingrese una opciones del menu",&opcion,0,1)){
 		printf("Algo ha salido mal.\n");
 	}
+	printf("Estamos trabajando muy duro. Por favor, espere..\n");
 	return opcion;
 }

@@ -1,2 +1,0 @@
-int parser_PassengerFromText(FILE* pFile , LinkedList* pArrayListPassenger, eTipo** tipos, int tamT, eEstado** estados, int tamE);
-int parser_PassengerFromBinary(FILE* pFile , LinkedList* pArrayListPassenger);

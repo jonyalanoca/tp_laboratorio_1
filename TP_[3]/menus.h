@@ -21,11 +21,11 @@ int menu(void);
 ///
 /// @return
 int menuModificar(void);
-/// @fn int menuInformes(void)
+/// @fn int menuoOrdenar(void)
 /// @brief muestra el submenu para los distintos informes.
 ///
 /// @return
-int menuInformes(void);
+int menuOrdenar(void);
 /// @fn int ascendenteDescendente(void)
 /// @brief muetra el submenu: ascendente y descendente
 ///

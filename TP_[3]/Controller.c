@@ -17,15 +17,15 @@
 int controller_loadFromText(char* path , LinkedList* pArrayListPassenger, eTipo tipos[], eEstado estados[], int tamT, int tamE)
 {
 	int todoOk=-1;
-		if (path!=NULL &&  pArrayListPassenger!=NULL){
-			FILE* pFile= fopen(path,"r");
-			if(pFile!=NULL){
-				parser_PassengerFromText(pFile,pArrayListPassenger, tipos, estados, tamT, tamE);
-				todoOk=0;
-			}
-			fclose(pFile);
+	if (path!=NULL &&  pArrayListPassenger!=NULL){
+		FILE* pFile= fopen(path,"r");
+		if(pFile!=NULL){
+			parser_PassengerFromText(pFile,pArrayListPassenger, tipos, estados, tamT, tamE);
+			todoOk=0;
 		}
-	    return todoOk;
+		fclose(pFile);
+	}
+	return todoOk;
 }
 
 /** \brief Carga los datos de los pasajeros desde el archivo data.csv (modo binario).
@@ -114,9 +114,9 @@ int controller_editPassenger(LinkedList* pArrayListPassenger, eTipo tipos[], eEs
     int auxId;
     int auxIndex;
     Passenger* aux=NULL;
-    if(pArrayListPassenger!=NULL){
+    if(pArrayListPassenger!=NULL && tipos!=NULL && estados!=NULL && tamT>0 && tamE>0){
     	controller_ListPassenger(pArrayListPassenger, tipos, estados, tamT, tamE);
-    	cargarValidarEnteroPositivo("Ingrese el id del Pasajero  a midificar",&auxId);
+    	cargarValidarEnteroPositivo("Ingrese el id del Pasajero  a modificar",&auxId);
     	auxIndex=controller_findIndexById(pArrayListPassenger, auxId);
     	if(auxIndex!=-1){
     		aux=(Passenger*)ll_get(pArrayListPassenger,auxIndex);
@@ -125,42 +125,42 @@ int controller_editPassenger(LinkedList* pArrayListPassenger, eTipo tipos[], eEs
 				{
 					case 1:
 						if(Passenger_modificarNombre(aux)==0){
-							printf("Seguadoron los cambios con exito.\n");
+							printf("Se guardaron los cambios con exito.\n");
 						}else{
 							printf("Hubo un erro en la validacion NULL.\n");
 						}
 						break;
 					case 2:
 						if(Passenger_modificarApellido(aux)==0){
-							printf("Seguadoron los cambios con exito.\n");
+							printf("Se guardaron los cambios con exito.\n");
 						}else{
 							printf("Hubo un erro en la validacion NULL.\n");
 						}
 						break;
 					case 3:
 						if(Passenger_modificarCodigoVuelo(aux)==0){
-							printf("Seguadoron los cambios con exito.\n");
+							printf("Se guardaron los cambios con exito.\n");
 						}else{
 							printf("Hubo un erro en la validacion NULL.\n");
 						}
 						break;
 					case 4:
 						if(Passenger_modificarPrecio(aux)==0){
-							printf("Seguadoron los cambios con exito.\n");
+							printf("Se guardaron los cambios con exito.\n");
 						}else{
 							printf("Hubo un erro en la validacion NULL.\n");
 						}
 						break;
 					case 5:
 						if(Passenger_modificarTipoPasajero(aux, tipos, tamT)==0){
-							printf("Seguadoron los cambios con exito.\n");
+							printf("Se guardaron los cambios con exito.\n");
 						}else{
 							printf("Hubo un erro en la validacion NULL.\n");
 						}
 						break;
 					case 6:
 						if(Passenger_modificarEstadoVuelo(aux, estados, tamE)==0){
-							printf("Seguadoron los cambios con exito.\n");
+							printf("Se guardaron los cambios con exito.\n");
 						}else{
 							printf("Hubo un erro en la validacion NULL.\n");
 						}
@@ -189,9 +189,34 @@ int controller_editPassenger(LinkedList* pArrayListPassenger, eTipo tipos[], eEs
  * \return int
  *
  */
-int controller_removePassenger(LinkedList* pArrayListPassenger)
+int controller_removePassenger(LinkedList* pArrayListPassenger, eTipo tipos[], eEstado estados[], int tamT, int tamE)
 {
-    return 1;
+    int todoOk=-1;
+    int auxId;
+    int auxIndex;
+    char opcion;
+    Passenger* aux=NULL;
+    if(pArrayListPassenger!=NULL && tipos!=NULL && estados!=NULL && tamT>0 && tamE>0){
+    	controller_ListPassenger(pArrayListPassenger, tipos, estados, tamT, tamE);
+		cargarValidarEnteroPositivo("Ingrese el id del Pasajero  a remover",&auxId);
+		auxIndex=controller_findIndexById(pArrayListPassenger, auxId);
+		if(auxIndex!=-1){
+			aux=(Passenger*)ll_get(pArrayListPassenger, auxIndex);
+			system("cls");
+			controller_showHeadList();
+			mostrarPasajero(aux, tipos, estados,tamT, tamE);
+			cargarValidarCharEntreDos("Confirme para borrar el registro (s/n)",&opcion,'s','n');
+			if(opcion=='s'){
+				ll_remove(pArrayListPassenger,auxIndex);
+				printf("Se removio el registro con exito.\n");
+			}else{
+				printf("No se realizaron cabios.\n");
+			}
+		}else{
+			printf("No se encontro el ID.\n");
+    	}
+    }
+    return todoOk;
 }
 
 /** \brief Listar pasajeros
@@ -203,7 +228,7 @@ int controller_removePassenger(LinkedList* pArrayListPassenger)
  */
 int controller_ListPassenger(LinkedList* pArrayListPassenger, eTipo tipos[], eEstado estados[], int tamT, int tamE)
 {
-	int returnAux=0;
+	int todoOk=-1;
 	Passenger* aux=NULL;
 	if (pArrayListPassenger!=NULL){
 		system("cls");
@@ -212,8 +237,9 @@ int controller_ListPassenger(LinkedList* pArrayListPassenger, eTipo tipos[], eEs
 			aux=(Passenger*)ll_get(pArrayListPassenger, i);
 			mostrarPasajero(aux, tipos, estados, tamT, tamE);
 		}
+		todoOk=0;
 	}
-	return returnAux;
+	return todoOk;
 }
 void controller_showHeadList(void){
 	printf("----------------------------------------------------------------------------------------\n");
@@ -227,9 +253,64 @@ void controller_showHeadList(void){
  * \return int
  *
  */
-int controller_sortPassenger(LinkedList* pArrayListPassenger)
+int controller_sortPassenger(LinkedList* pArrayListPassenger, eTipo tipos[], eEstado estados[], int tamT, int tamE)
 {
-    return 1;
+	int todoOk=-1;
+	if (pArrayListPassenger!=NULL){
+		switch(menuOrdenar()){
+			case 1:
+				if(!ll_sort(pArrayListPassenger,compararPorId,ascendenteDescendente())){
+					printf("Uff! Costo, pero lo logramos. Se Ordeno la lista con exito.\n");
+				}else{
+					printf("Ocurrio un problema al ordenar.\n");
+				}
+				break;
+			case 2:
+				if(!ll_sort(pArrayListPassenger,compararPorNombre,ascendenteDescendente())){
+					printf("Uff! Costo, pero lo logramos. Se Ordeno la lista con exito.\n");
+				}else{
+					printf("Ocurrio un problema al ordenar.\n");
+				}
+				break;
+			case 3:
+				if(!ll_sort(pArrayListPassenger,compararPorApellido,ascendenteDescendente())){
+					printf("Uff! Costo, pero lo logramos. Se Ordeno la lista con exito.\n");
+				}else{
+					printf("Ocurrio un problema al ordenar.\n");
+				}
+				break;
+			case 4:
+				if(!ll_sort(pArrayListPassenger,compararPorPrecio,ascendenteDescendente())){
+					printf("Uff! Costo, pero lo logramos. Se Ordeno la lista con exito.\n");
+				}else{
+					printf("Ocurrio un problema al ordenar.\n");
+				}
+				break;
+			case 5:
+				if(!ll_sort(pArrayListPassenger,compararPorCodigo,ascendenteDescendente())){
+					printf("Uff! Costo, pero lo logramos. Se Ordeno la lista con exito.\n");
+				}else{
+					printf("Ocurrio un problema al ordenar.\n");
+				}
+				break;
+			case 6:
+				if(!ll_sort(pArrayListPassenger,compararPorTipo,ascendenteDescendente())){
+					printf("Uff! Costo, pero lo logramos. Se Ordeno la lista con exito.\n");
+				}else{
+					printf("Ocurrio un problema al ordenar.\n");
+				}
+				break;
+			case 7:
+				if(!ll_sort(pArrayListPassenger,compararPorEstado,ascendenteDescendente())){
+					printf("Uff! Costo, pero lo logramos. Se Ordeno la lista con exito.\n");
+				}else{
+					printf("Ocurrio un problema al ordenar.\n");
+				}
+				break;
+		}
+		todoOk=0;
+	}
+	return todoOk;
 }
 
 /** \brief Guarda los datos de los pasajeros en el archivo data.csv (modo texto).
@@ -239,9 +320,28 @@ int controller_sortPassenger(LinkedList* pArrayListPassenger)
  * \return int
  *
  */
-int controller_saveAsText(char* path , LinkedList* pArrayListPassenger)
+int controller_saveAsText(char* path , LinkedList* pArrayListPassenger, eTipo tipos[], eEstado estados[], int tamT, int tamE)
 {
-    return 1;
+    int todoOk=-1;
+    int len;
+    char tipoPasajeroStr[20];
+    char estadoVueloStr[20];
+    Passenger* aux;
+    if(pArrayListPassenger!=NULL&& path!=NULL){
+    	FILE* pFile=fopen(path, "w");
+    	if(pFile!=NULL){
+    		len=ll_len(pArrayListPassenger);
+    		fprintf(pFile,"id,name,lastname,price,flycode,typePassenger,statusFlight\n");
+    		for(int i=0; i<len;i++){
+    			aux=(Passenger*)ll_get(pArrayListPassenger, i);
+    			obtenerDescripcionPorIdTipo(tipos, tamT, aux->tipoPasajero, tipoPasajeroStr);
+    			obtenerDescripcionPorIdEstado(estados, tamE, aux->estadoVuelo, estadoVueloStr);
+    			fprintf(pFile,"%d,%s,%s,%0.f,%s,%s,%s\n",aux->id, aux->nombre, aux->apellido, aux->precio, aux->codigoVuelo, tipoPasajeroStr, estadoVueloStr);
+    		}
+    	}
+    	fclose(pFile);
+    }
+    return todoOk;
 }
 
 /** \brief Guarda los datos de los pasajeros en el archivo data.csv (modo binario).
