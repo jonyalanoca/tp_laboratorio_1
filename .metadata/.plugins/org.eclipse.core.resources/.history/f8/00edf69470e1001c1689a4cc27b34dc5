@@ -1,0 +1,30 @@
+/*
+ * tipo.c
+ *
+ *  Created on: 30 may. 2022
+ *      Author: Jony
+ */
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "tipo.h"
+eTipo* hardCodearTipos(int tamT){
+	int id=1000;
+	char descripcion[3][20]={"firstClass","ExecutiveClass","EconomyClass"};
+	eTipo** tipos=(eTipo**) malloc (sizeof(eTipo*)*tamT);
+	if (tipos==NULL){
+			printf("Hubo un error al crear un espacio en la momoria dinamica.\n");
+			exit(1);
+		}
+	printf("aca");
+	for(int i=0;i<tamT;i++){
+		(*tipos + i)->id=id;
+
+		strcpy((*tipos+i)->descripcion, descripcion[i]);
+		id++;
+
+	}
+
+	printf("que pasa");
+	return tipos;
+}

@@ -1,0 +1,85 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "LinkedList.h"
+#include "Controller.h"
+#include "Passenger.h"
+
+#include "Tipo.h"
+#include "Estado.h"
+#include "otros.h"
+#include "menus.h"
+#define TAM_TIPO 3
+#define TAM_ESTADO 4
+
+/****************************************************
+    Menu:
+     1. Cargar los datos de los pasajeros desde el archivo data.csv (modo texto).
+     2. Cargar los datos de los pasajeros desde el archivo data.csv (modo binario).
+     3. Alta de pasajero
+     4. Modificar datos de pasajero
+     5. Baja de pasajero
+     6. Listar pasajeros
+     7. Ordenar pasajeros
+     8. Guardar los datos de los pasajeros en el archivo data.csv (modo texto).
+     9. Guardar los datos de los pasajeros en el archivo data.csv (modo binario).
+    10. Salir
+*****************************************************/
+
+
+int main()
+{
+	setbuf(stdout,NULL);
+    LinkedList* listaPasajeros = ll_newLinkedList();
+    verificarNULL(listaPasajeros);
+	eTipo tipos[TAM_TIPO];
+	hardCodearTipos(tipos, TAM_TIPO);
+	//printf("%d\n", obtenerIdPorDescripcionTipo(tipos, TAM_TIPO,"FirstClass"));
+	eEstado estados[TAM_ESTADO];
+	hardCodearEstados(estados, TAM_ESTADO);
+	//sector pruebas
+	//printf("%s",tipos[1].descripcion);
+	//fin pruebas
+	char salir;
+	do{
+		switch(menu())
+		{
+			case 1:
+				controller_loadFromText("data.csv",listaPasajeros, tipos, estados, TAM_TIPO, TAM_ESTADO);
+				printf("%d",ll_len(listaPasajeros));
+				break;
+			case 2:
+
+				break;
+			case 3:
+
+				break;
+			case 4:
+
+				break;
+			case 5:
+
+				break;
+			case 6:
+
+				break;
+			case 7:
+
+				break;
+			case 8:
+
+				break;
+			case 9:
+
+				break;
+			case 10:
+				if(!cerrar(&salir)){
+					printf("Hubo un problema con la validacion.\n");
+				}
+				break;
+		}
+		system("pause");
+		system("cls");
+	}while(salir!='s');
+
+    return 0;
+}

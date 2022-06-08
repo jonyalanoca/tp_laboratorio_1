@@ -1,0 +1,13 @@
+
+
+#ifndef TIPO_H_
+#define TIPO_H_
+
+typedef struct{
+	int id;
+	char descripcion[20];
+}eEstado;
+
+#endif /* TIPO_H_ */
+eEstado** hardCodearEstados(int tamE);
+int obtenerIdPorDescripcionTipo(eTipo** vecTipos,int tamT, char* string);

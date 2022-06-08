@@ -1,0 +1,201 @@
+/*
+ * Passenger.c
+ *
+ *  Created on: 19 may. 2022
+ *      Author: Maru
+ */
+#include <ctype.h>
+#include "Passenger.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+Passenger* Passenger_new(){
+	Passenger* auxPassenger=(Passenger*) malloc(sizeof(Passenger));
+	if (auxPassenger==NULL){
+		printf("No hay espacio en la memoria dinamica.\n");
+		exit(1);
+	}
+	return auxPassenger;
+}
+Passenger* Passenger_newParametros(char* idStr,char* nombreStr,char* apellidoStr,char* precioStr,char* codigoVueloStr, char* tipoPasajeroStr, char* estadoVueloStr, eTipo tipos[], eEstado estados[], int tamT, int tamE){
+	Passenger* auxPassenger= (Passenger*) malloc(sizeof(Passenger));
+	if(idStr!=NULL && nombreStr!=NULL && apellidoStr!=NULL && precioStr!=NULL && tipoPasajeroStr!=NULL && codigoVueloStr!=NULL && estadoVueloStr!=NULL && tipos!=NULL && tamT>0){
+		Passenger_setId(auxPassenger, atoi(idStr));
+		Passenger_setNombre(auxPassenger,nombreStr);
+		Passenger_setApellido(auxPassenger, apellidoStr);
+		Passenger_setPrecio(auxPassenger, atof(precioStr));
+		Passenger_setCodigoVuelo(auxPassenger, codigoVueloStr);
+		//printf("aca: %d\n",obtenerIdPorDescripcionEstado(estados, tamE, estadoVueloStr));
+		//auxPassenger->tipoPasajero=obtenerIdPorDescripcionTipo(tipos, tamT, tipoPasajeroStr);
+		//Passenger_setTipoPasajero(auxPassenger, obtenerIdPorDescripcionTipo(tipos, tamT, tipoPasajeroStr));
+		//Passenger_setEstadoVuelo(auxPassenger, obtenerIdPorDescripcionEstado(estados, tamE, estadoVueloStr));
+
+		printf("%d %15s %15s %10.2f %10s %d\n",auxPassenger->id,auxPassenger->nombre,auxPassenger->apellido, auxPassenger->precio, auxPassenger->codigoVuelo, auxPassenger->tipoPasajero);
+	}
+	return auxPassenger;
+}
+int Passenger_setId(Passenger* this,int id){
+	int todoOk=-1;
+	if(this!=NULL && id>0){
+		this->id=id;
+		todoOk=0;
+	}
+	return todoOk;
+}
+int Passenger_getId(Passenger* this,int* id){
+	int todoOk=-1;
+	if(this!=NULL){
+		*id=this->id;
+		todoOk=0;
+	}
+	return todoOk;
+}
+
+int Passenger_setNombre(Passenger* this,char* nombre){
+	int todoOk=-1;
+	int lenNombre;
+	if(this!=NULL && nombre!=NULL){
+		lenNombre=strlen(nombre);
+		if(lenNombre>1 && lenNombre<20){
+			strlwr(nombre);
+			nombre[0]=toupper(nombre[0]);
+			strcpy(this->nombre,nombre);
+		}
+		todoOk=0;
+	}
+	return todoOk;
+}
+int Passenger_getNombre(Passenger* this,char* nombre){
+	int todoOk=-1;
+	if(this!=NULL && nombre!=NULL){
+		strlwr(nombre);
+		nombre[0]=toupper(nombre[0]);
+		strcpy(nombre, this->nombre);
+		todoOk=0;
+	}
+	return todoOk;
+}
+
+int Passenger_setApellido(Passenger* this,char* apellido){
+	int todoOk=-1;
+	int lenApellido;
+	if(this!=NULL && apellido!=NULL){
+		lenApellido=strlen(apellido);
+		if(lenApellido>1 && lenApellido<20){
+			strlwr(apellido);
+			apellido[0]=toupper(apellido[0]);
+			strcpy(this->apellido,apellido);
+		}
+		todoOk=0;
+	}
+	return todoOk;
+}
+int Passenger_getApellido(Passenger* this,char* apellido){
+	int todoOk=-1;
+	if(this!=NULL && apellido!=NULL){
+		strlwr(apellido);
+		apellido[0]=toupper(apellido[0]);
+		strcpy(apellido, this->apellido);
+		todoOk=0;
+	}
+	return todoOk;
+}
+
+int Passenger_setCodigoVuelo(Passenger* this,char* codigoVuelo){
+	int todoOk=-1;
+	int lenCodigoVuelo;
+	if(this!=NULL && codigoVuelo!=NULL){
+		lenCodigoVuelo=strlen(codigoVuelo);
+		if(lenCodigoVuelo>1 && lenCodigoVuelo<8){
+			strcpy(this->codigoVuelo,codigoVuelo);
+		}
+		todoOk=0;
+	}
+	return todoOk;
+}
+int Passenger_getCodigoVuelo(Passenger* this,char* codigoVuelo){
+	int todoOk=-1;
+	if(this!=NULL && codigoVuelo!=NULL){
+		strcpy(codigoVuelo, this->codigoVuelo);
+		todoOk=0;
+	}
+	return todoOk;
+}
+
+int Passenger_setTipoPasajero(Passenger* this,int tipoPasajero){
+	int todoOk=-1;
+	if(this!=NULL){
+		this->tipoPasajero=tipoPasajero;
+		todoOk=0;
+	}
+	return todoOk;
+}
+int Passenger_getTipoPasajero(Passenger* this,int* tipoPasajero){
+	int todoOk=-1;
+	if(this!=NULL){
+		*tipoPasajero=this->tipoPasajero;
+		todoOk=0;
+	}
+	return todoOk;
+}
+
+int Passenger_setPrecio(Passenger* this,float precio){
+	int todoOk=-1;
+	if(this!=NULL){
+		if(precio>0){
+			this->precio=precio;
+		}else{
+			this->id=0;
+		}
+
+		todoOk=0;
+	}
+	return todoOk;
+}
+int Passenger_getPrecio(Passenger* this,float* precio){
+	int todoOk=-1;
+	if(this!=NULL){
+		*precio=this->precio;
+		todoOk=0;
+	}
+	return todoOk;
+}
+int Passenger_setEstadoVuelo(Passenger* this,int estadoVuelo){
+	int todoOk=-1;
+	if(this!=NULL){
+		this->estadoVuelo=estadoVuelo;
+		todoOk=0;
+	}
+	return todoOk;
+}
+int Passenger_getEstadoVuelo(Passenger* this,int* estadoVuelo){
+	int todoOk=-1;
+	if(this!=NULL){
+		*estadoVuelo=this->estadoVuelo;
+		todoOk=0;
+	}
+	return todoOk;
+}
+
+void mostrarPasajero(Passenger* pasajero, eTipo tipos[], eEstado estados[], int tamT, int tamE){
+	int id;
+	char name[20];
+	char lastName[20];
+	float price;
+	char flyCode[10];
+	char typePassenger[20];
+	char statusFlight[20];
+	int aux;
+	Passenger_getId(pasajero, &id);
+	Passenger_getNombre(pasajero, name);
+	Passenger_getApellido(pasajero, lastName);
+	Passenger_getPrecio(pasajero,&price);
+	Passenger_getCodigoVuelo(pasajero, flyCode);
+	Passenger_getTipoPasajero(pasajero, &aux);
+	obtenerDescripcionPorIdTipo(tipos, tamT, aux, typePassenger);
+	Passenger_getEstadoVuelo(pasajero, &aux);
+	obtenerDescripcionPorIdEstado(estados, tamE, aux, typePassenger);
+	printf("%d %15s %15s %10.2f %10s %15s %15s\n",id, name, lastName, price, flyCode, typePassenger, statusFlight);
+}

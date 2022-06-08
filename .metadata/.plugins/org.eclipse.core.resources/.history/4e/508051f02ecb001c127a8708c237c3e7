@@ -1,0 +1,33 @@
+/*
+ * VueloEstado.h
+ *
+ *  Created on: 1 may. 2022
+ *      Author: Jony
+ */
+#include "ArrayPassenger.h"
+#ifndef VUELOESTADO_H_
+#define VUELOESTADO_H_
+
+typedef struct{
+	int id;
+	char codigoDeVuelo[15];
+	char estado[15];
+} eVueloEstado;
+
+#endif /* VUELOESTADO_H_ */
+int printfEstados(eVueloEstado lista[], int len);
+void printfEstado(eVueloEstado lista);
+/// @fn int validarDatos(char[], char[], float*, char[], int*, int, int)
+/// @brief pide y valida los datos necesarios, es un paso previo a agregar los datos a nuestro array de estructura.
+///
+/// @param name
+/// @param lastName
+/// @param price
+/// @param flycode
+/// @param typePassenger
+/// @param tamName
+/// @param tamFly
+/// @return retorna -1 para puntero nulo, 0 si todo salio bien.
+int validarDatos(int id,char name[], char lastName[], float* price, int* idEstado, int* typePassenger, int tamName, int tamFly, eVueloEstado listaEstados[], int tamEstados);
+void printfPassengerParam(eVueloEstado lista[],int tamEstado, int id,char name[], char lastName[], float price, int typePassenger, int idEstado);
+int buscarIndexPorId(eVueloEstado* lista, int tam, int id);

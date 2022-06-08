@@ -1,7 +1,14 @@
-23:24:38 **** Incremental Build of configuration Debug for project TP_[2] ****
+13:52:38 **** Rebuild of configuration Debug for project TP_[2] ****
 Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\otros.o" "..\\src\\otros.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\VueloEstado.o" "..\\src\\VueloEstado.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\hardcode.o" "..\\src\\hardcode.c" 
 gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\animacion.o" "..\\src\\animacion.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\validaciones.o" "..\\src\\validaciones.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\ArrayPassenger.o" "..\\src\\ArrayPassenger.c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\TP_[2].o" "..\\src\\TP_[2].c" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\menus.o" "..\\src\\menus.c" 
 gcc -o TP_[2].exe "src\\ArrayPassenger.o" "src\\TP_[2].o" "src\\VueloEstado.o" "src\\animacion.o" "src\\hardcode.o" "src\\menus.o" "src\\otros.o" "src\\validaciones.o" 
 
-23:24:39 Build Finished. 0 errors, 0 warnings. (took 1s.156ms)
+13:52:43 Build Finished. 0 errors, 0 warnings. (took 4s.712ms)
 

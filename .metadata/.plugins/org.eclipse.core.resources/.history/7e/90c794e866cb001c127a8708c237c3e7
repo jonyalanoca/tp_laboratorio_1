@@ -1,0 +1,25 @@
+/*
+ * hardcode.c
+ *
+ *  Created on: 3 may. 2022
+ *      Author: Jony
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "otros.h"
+#include "ArrayPassenger.h"
+#include "VueloEstado.h"
+int hardcodear(Passenger* list,eVueloEstado* listaEstados, int len,int lenEstados, int* ids, int cantidad){
+	int todoOk=-1;
+	char nombres[50][20]={"Esteban","Alphonse","Chiquia","Yvon","Joye","Morganica","Ronnie","Alaric","Shanan","Cathrin","Noel","Harwell","Camile","Kimmy","Winnifred","Greta","Howard","Tedman","Alexis","Lanny","Krista","Daphna","Odelinda","Rice","Pamelina","Clementia","Hillery","Giselle","Cecilius","Frank","Odilia","Madonna","Tadeo","Aubrey","Doro","Dorolisa","Clementius","Lindsey","Hermione","Cory","Micki","Beatriz","Germaine","Reagan","Noak","Max","Lezlie","Perri","Katherine","Norman"};
+	char apellidos[50][20]={"Eingerfield","Lever","Drydale","Iwanczyk","Le Surf","Priestman","Layus","Ruspine","Wedgwood","Searl","Crosio","Trask","Whitwam","McLoughlin","Ricardou","Blees","Rudham","Mathe","Ivatts","Mereweather","Newling","Byass","Tuer","Copper","Fitchet","Kilroy","Ledekker","McClaren","Kendred","Lockart","Kemell","Pearsall","Mollitt","Marian","Malthouse","Arnould","Melsom","McKeran","Cogger","Gostyke","Keenlayside","Greenin","Beckenham","Iacoviello","Boshere","MacLice","Darling","Obispo","Folker","Edgeson"};
+	if(list!=NULL && len>0 && listaEstados!=NULL && lenEstados>0 && cantidad>0){
+		for(int i=0; i<cantidad;i++){
+			addPassenger(list, *ids, nombres[i], apellidos[i],numeroRandom(10000,100000),numeroRandom(1,3),listaEstados[numeroRandom(11)].codigoDeVuelo,listaEstados[numeroRandom(11)].id);
+		}
+
+		todoOk=0;
+	}
+	return todoOk;
+}

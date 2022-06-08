@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "estado.h"
+eEstado** hardCodearEstados(int tamE){
+	int id=1000;
+	char descripcion[3][20]={"firstClass","ExecutiveClass","EconomyClass"};
+	eTipo** auxtipos=(eTipo**) malloc (sizeof(eTipo*)*tamT);
+	if (auxtipos==NULL){
+			printf("Hubo un error al crear un espacio en la momoria dinamica.\n");
+			exit(1);
+		}
+	for(int i=0;i<tamT;i++){
+		(*auxtipos + i)->id=id;
+
+		strcpy((*auxtipos+i)->descripcion, descripcion[i]);
+		id++;
+
+	}
+
+	return auxtipos;
+	free(auxtipos);
+}
+int obtenerIdPorDescripcionTipo(eTipo** vecTipos,int tamT, char* string){
+	int todoOk=-1;
+	if(vecTipos!=NULL && string!=NULL && tamT>0){
+		for(int i=0;i>tamT;i++){
+			if(strcmp((*vecTipos + i)->descripcion, string)){
+				todoOk=(*vecTipos + i)->id;
+				break;
+			}
+		}
+	}
+	return todoOk;
+}

@@ -1,0 +1,89 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "LinkedList.h"
+#include "Controller.h"
+#include "Passenger.h"
+
+#include <string.h>
+#define TAM_TIPO 3
+
+/****************************************************
+    Menu:
+     1. Cargar los datos de los pasajeros desde el archivo data.csv (modo texto).
+     2. Cargar los datos de los pasajeros desde el archivo data.csv (modo binario).
+     3. Alta de pasajero
+     4. Modificar datos de pasajero
+     5. Baja de pasajero
+     6. Listar pasajeros
+     7. Ordenar pasajeros
+     8. Guardar los datos de los pasajeros en el archivo data.csv (modo texto).
+     9. Guardar los datos de los pasajeros en el archivo data.csv (modo binario).
+    10. Salir
+*****************************************************/
+
+
+typedef struct{
+	int id;
+	char descripcion[20];
+}eTipo;
+
+
+int hardCodearTipos(eTipo tipos[],int tamT);
+int obtenerIdPorDescripcionTipo(eTipo tipos[], int tamT, char* descripcionTipo);
+
+void verificarNULL(void* funcion);
+int main()
+{
+    int option = 0;
+    LinkedList* listaPasajeros =NULL;// ll_newLinkedList();
+    verificarNULL(listaPasajeros);
+	eTipo tipos[TAM_TIPO];
+	hardCodearTipos(tipos, TAM_TIPO);
+
+	system("pause");
+    do{
+        switch(option)
+        {
+            case 1:
+                controller_loadFromText("data.csv",listaPasajeros);
+                break;
+        }
+    }while(0);
+
+    return 0;
+}
+int hardCodearTipos(eTipo tipos[],int tamT){
+	int todoOk=-1;
+	int id=1000;
+	char descripcion[3][20]={"FirstClass","ExecutiveClass","EconomyClass"};
+	if(tipos!=NULL && tamT>0){
+		for(int i =0; i<tamT;i++){
+			tipos[i].id=id;
+			strcpy(tipos[i].descripcion, descripcion[i]);
+			id++;
+		}
+		todoOk=0;
+	}
+	return todoOk;
+}
+int obtenerIdPorDescripcionTipo(eTipo tipos[], int tamT, char* descripcionTipo){
+	int todoOk=-1;
+	if(tipos!=NULL && tamT>0){
+		for(int i=0; i<tamT; i++){
+			if(strcmp(tipos[i].descripcion,descripcionTipo)==0){
+				todoOk=tipos[i].id;
+				break;
+			}
+		}
+	}
+	return todoOk;
+}
+void verificarNULL(void* puntero){
+	if(funcion==NULL){
+		printf("Hubo un error al crear un espacio en la momoria dinamica.\n");
+		system("pause");
+		exit(1);
+	}else{
+		printf("todo Salio Bien.\n");
+	}
+}

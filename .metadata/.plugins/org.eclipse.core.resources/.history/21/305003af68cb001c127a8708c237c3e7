@@ -1,0 +1,14 @@
+/*
+ * hardcode.h
+ *
+ *  Created on: 3 may. 2022
+ *      Author: Jony
+ */
+
+#ifndef HARDCODE_H_
+#define HARDCODE_H_
+
+
+
+#endif /* HARDCODE_H_ */
+int hardcodear(Passenger* list,eVueloEstado listaEstados, int len,int lenEstados, int* ids, int cantidad);

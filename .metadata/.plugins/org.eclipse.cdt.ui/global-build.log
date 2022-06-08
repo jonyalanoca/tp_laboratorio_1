@@ -1,4 +1,4 @@
-23:24:38 **** Incremental Build of configuration Debug for project TP_[2] ****
+18:22:52 **** Incremental Build of configuration Debug for project TP_[3] ****
 Info: Internal Builder is used for build
-gcc -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\animacion.o" "..\\src\\animacion.c" 
-gcc -o TP_[2].exe "src\\ArrayPassenger.o" "src\\TP_[2].o" "src\\VueloEstado.o" "src\\animacion.o" "src\\hardcode.o" "src\\menus.o" "src\\otros.o" "src\\validaciones.o" 
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o Controller.o "..\\Controller.c" 
+gcc "-LC:\\Users\\Jony\\Desktop\\UTN\\tp_laboratorio_1\\TP_[3]" -o TP_[3].exe Controller.o Estado.o Passenger.o Tipo.o main.o menus.o otros.o parser.o validaciones.o -lLinkedList 
