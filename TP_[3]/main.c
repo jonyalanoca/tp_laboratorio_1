@@ -11,21 +11,6 @@
 #define TAM_TIPO 3
 #define TAM_ESTADO 4
 
-/****************************************************
-    Menu:
-     1. Cargar los datos de los pasajeros desde el archivo data.csv (modo texto).
-     2. Cargar los datos de los pasajeros desde el archivo data.bin (modo binario).
-     3. Alta de pasajero
-     4. Modificar datos de pasajero
-     5. Baja de pasajero
-     6. Listar pasajeros
-     7. Ordenar pasajeros
-     8. Guardar los datos de los pasajeros en el archivo data.csv (modo texto).
-     9. Guardar los datos de los pasajeros en el archivo dato.bin (modo binario).
-    10. Salir
-*****************************************************/
-
-
 int main()
 {
 	setbuf(stdout,NULL);
@@ -36,39 +21,93 @@ int main()
 	eEstado estados[TAM_ESTADO];
 	hardCodearEstados(estados, TAM_ESTADO);
 	char salir;
+	int vacio;
 	do{
 		switch(menu())
 		{
 			case 1:
-				controller_loadFromText("data.csv",listaPasajeros, tipos, estados, TAM_TIPO, TAM_ESTADO);
+				if(controller_BorrarYCargar(listaPasajeros)=='s'){
+					if(!controller_loadFromText("data.csv",listaPasajeros, tipos, estados, TAM_TIPO, TAM_ESTADO)){
+						printf("Se cargaron los datos con exito.\n");
+					}else{
+						printf("Hubo en error en las validaciones.\n");
+					}
+				}
 				break;
 			case 2:
-				controller_loadFromBinary("data.bin",listaPasajeros);
+				if(controller_BorrarYCargar(listaPasajeros)=='s'){
+					if(!controller_loadFromBinary("data.bin",listaPasajeros)){
+						printf("Se cargaron los datos con exito.\n");
+					}else{
+						printf("Hubo en error en las validaciones.\n");
+					}
+				}
 				break;
 			case 3:
-				controller_addPassenger(listaPasajeros, tipos, estados, TAM_TIPO, TAM_ESTADO);
+				if(controller_addPassenger(listaPasajeros, tipos, estados, TAM_TIPO, TAM_ESTADO)==-1){
+					printf("Hubo en error en las validaciones.\n");
+				}
 				break;
 			case 4:
-				controller_editPassenger(listaPasajeros, tipos, estados, TAM_TIPO, TAM_ESTADO);
+				vacio=ll_isEmpty(listaPasajeros);
+				if(vacio){
+					printf("Primero carge algun registro. (Opcion: 1-2-3)");
+				}else if(!vacio){
+					if(controller_editPassenger(listaPasajeros, tipos, estados, TAM_TIPO, TAM_ESTADO)==-1){
+						printf("Hubo un problema con la validacion.\n");
+					}
+				}
 				break;
 			case 5:
-				controller_removePassenger(listaPasajeros, tipos, estados, TAM_TIPO, TAM_ESTADO);
+				vacio=ll_isEmpty(listaPasajeros);
+				if(vacio){
+					printf("Primero carge algun registro. (Opcion: 1-2-3)");
+				}else if(!vacio){
+					if(controller_removePassenger(listaPasajeros, tipos, estados, TAM_TIPO, TAM_ESTADO)==-1){
+						printf("Hubo un problema con la validacion.\n");
+					}
+				}
 				break;
 			case 6:
-				controller_ListPassenger(listaPasajeros, tipos, estados,TAM_TIPO, TAM_ESTADO);
+				vacio=ll_isEmpty(listaPasajeros);
+				if(vacio){
+					printf("Primero carge algun registro. (Opcion: 1-2-3)");
+				}else if(!vacio){
+					if(controller_ListPassenger(listaPasajeros, tipos, estados,TAM_TIPO, TAM_ESTADO)==-1){
+						printf("Hubo un problema con la validacion.\n");
+					}
+				}
 				break;
 			case 7:
-				controller_sortPassenger(listaPasajeros, tipos, estados,TAM_TIPO, TAM_ESTADO);
+				vacio=ll_isEmpty(listaPasajeros);
+				if(vacio){
+					printf("Primero carge algun registro. (Opcion: 1-2-3)");
+				}else if(!vacio){
+					if(controller_sortPassenger(listaPasajeros, tipos, estados,TAM_TIPO, TAM_ESTADO)==-1){
+						printf("Hubo un problema con la validacion.\n");
+					}
+				}
+
 				break;
 			case 8:
-				controller_saveAsText("data.csv",listaPasajeros, tipos, estados,TAM_TIPO, TAM_ESTADO);
+				if(controller_saveAsText("data.csv",listaPasajeros, tipos, estados,TAM_TIPO, TAM_ESTADO)==-1){
+					printf("Hubo un problema con la validacion.\n");
+				}else{
+					printf("Se guardo con exito.\n");
+				}
 				break;
 			case 9:
-				controller_saveAsBinary("data.bin",listaPasajeros);
+				if(controller_saveAsBinary("data.bin",listaPasajeros)==-1){
+					printf("Hubo un problema con la validacion.\n");
+				}else{
+					printf("Se guardo con exito.\n");
+				}
 				break;
 			case 10:
 				if(!cerrar(&salir)){
 					printf("Hubo un problema con la validacion.\n");
+				}else{
+					controller_liberarMemoria(listaPasajeros);
 				}
 				break;
 		}
@@ -78,5 +117,3 @@ int main()
 
     return 0;
 }
-
-

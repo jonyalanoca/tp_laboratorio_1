@@ -25,4 +25,8 @@ int cerrar(char* pSalir);
 /// @return devuelve el numero random
 int numeroRandom(int numero1, int numero2);
 
+/// @fn void verificarNULL(void*)
+/// @brief verifica si el puntero pasado por parametro es NULL, en caso que si se NULL cierra el programa para evitar fallos
+///
+/// @param funcion
 void verificarNULL(void* funcion);

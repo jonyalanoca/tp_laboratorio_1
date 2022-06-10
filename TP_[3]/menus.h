@@ -14,20 +14,20 @@
 /// @fn int menu(void)
 /// @brief muestra nuestro menu principal: alta, baja, midificar, infores y salir
 ///
-/// @return
+/// @returnretorna el numero del de la opcion elegida por el usuario
 int menu(void);
 /// @fn int menuModificar(void)
 /// @brief muetra es submenu para midificar datos de un pasajero
 ///
-/// @return
+/// @returnretorna el numero del de la opcion elegida por el usuario
 int menuModificar(void);
 /// @fn int menuoOrdenar(void)
 /// @brief muestra el submenu para los distintos informes.
 ///
-/// @return
+/// @returnretorna el numero del de la opcion elegida por el usuario
 int menuOrdenar(void);
 /// @fn int ascendenteDescendente(void)
 /// @brief muetra el submenu: ascendente y descendente
 ///
-/// @return
+/// @return retorna el numero del de la opcion elegida por el usuario
 int ascendenteDescendente(void);

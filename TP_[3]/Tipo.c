@@ -44,7 +44,7 @@ int obtenerDescripcionPorIdTipo(eTipo tipos[], int tamT, int id , char* descripc
 				break;
 			}
 		}
-		todoOk=1;
+		todoOk=0;
 	}
 	return todoOk;
 }

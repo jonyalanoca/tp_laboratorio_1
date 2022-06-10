@@ -7,13 +7,6 @@
 #include "validaciones.h"
 #include "menus.h"
 
-/** \brief Carga los datos de los pasajeros desde el archivo data.csv (modo texto).
- *
- * \param path char*
- * \param pArrayListPassenger LinkedList*
- * \return int
- *
- */
 int controller_loadFromText(char* path , LinkedList* pArrayListPassenger, eTipo tipos[], eEstado estados[], int tamT, int tamE)
 {
 	int todoOk=-1;
@@ -28,13 +21,6 @@ int controller_loadFromText(char* path , LinkedList* pArrayListPassenger, eTipo 
 	return todoOk;
 }
 
-/** \brief Carga los datos de los pasajeros desde el archivo data.csv (modo binario).
- *
- * \param path char*
- * \param pArrayListPassenger LinkedList*
- * \return int
- *
- */
 int controller_loadFromBinary(char* path , LinkedList* pArrayListPassenger)
 {
 	int todoOk=-1;
@@ -48,13 +34,6 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListPassenger)
 	}
 	return todoOk;
 }
-/** \brief Alta de pasajero
- *
- * \param path char*
- * \param pArrayListPassenger LinkedList*
- * \return int
- *
- */
 int controller_addPassenger(LinkedList* pArrayListPassenger, eTipo tipos[], eEstado estados[], int tamT, int tamE)
 {
     int todoOk=-1;
@@ -100,13 +79,6 @@ int controller_addPassenger(LinkedList* pArrayListPassenger, eTipo tipos[], eEst
     return todoOk;
 }
 
-/** \brief Modificar datos de pasajero
- *
- * \param path char*
- * \param pArrayListPassenger LinkedList*
- * \return int
- *
- */
 int controller_editPassenger(LinkedList* pArrayListPassenger, eTipo tipos[], eEstado estados[], int tamT, int tamE)
 {
     int todoOk=-1;
@@ -115,6 +87,7 @@ int controller_editPassenger(LinkedList* pArrayListPassenger, eTipo tipos[], eEs
     int auxIndex;
     Passenger* aux=NULL;
     if(pArrayListPassenger!=NULL && tipos!=NULL && estados!=NULL && tamT>0 && tamE>0){
+    	todoOk=0;
     	controller_ListPassenger(pArrayListPassenger, tipos, estados, tamT, tamE);
     	cargarValidarEnteroPositivo("Ingrese el id del Pasajero  a modificar",&auxId);
     	auxIndex=controller_findIndexById(pArrayListPassenger, auxId);
@@ -182,13 +155,6 @@ int controller_editPassenger(LinkedList* pArrayListPassenger, eTipo tipos[], eEs
     return todoOk;
 }
 
-/** \brief Baja de pasajero
- *
- * \param path char*
- * \param pArrayListPassenger LinkedList*
- * \return int
- *
- */
 int controller_removePassenger(LinkedList* pArrayListPassenger, eTipo tipos[], eEstado estados[], int tamT, int tamE)
 {
     int todoOk=-1;
@@ -208,6 +174,7 @@ int controller_removePassenger(LinkedList* pArrayListPassenger, eTipo tipos[], e
 			cargarValidarCharEntreDos("Confirme para borrar el registro (s/n)",&opcion,'s','n');
 			if(opcion=='s'){
 				ll_remove(pArrayListPassenger,auxIndex);
+				free(aux);
 				printf("Se removio el registro con exito.\n");
 			}else{
 				printf("No se realizaron cabios.\n");
@@ -215,17 +182,11 @@ int controller_removePassenger(LinkedList* pArrayListPassenger, eTipo tipos[], e
 		}else{
 			printf("No se encontro el ID.\n");
     	}
+		todoOk=0;
     }
     return todoOk;
 }
 
-/** \brief Listar pasajeros
- *
- * \param path char*
- * \param pArrayListPassenger LinkedList*
- * \return int
- *
- */
 int controller_ListPassenger(LinkedList* pArrayListPassenger, eTipo tipos[], eEstado estados[], int tamT, int tamE)
 {
 	int todoOk=-1;
@@ -246,13 +207,7 @@ void controller_showHeadList(void){
 	printf("   ID	    NAME        LASTNAME      PRICE     FLYCODE  TYPE-PASSENGER   STATUS-FLIGHT|\n");
 	printf("----------------------------------------------------------------------------------------\n");
 }
-/** \brief Ordenar pasajeros
- *
- * \param path char*
- * \param pArrayListPassenger LinkedList*
- * \return int
- *
- */
+
 int controller_sortPassenger(LinkedList* pArrayListPassenger, eTipo tipos[], eEstado estados[], int tamT, int tamE)
 {
 	int todoOk=-1;
@@ -313,13 +268,6 @@ int controller_sortPassenger(LinkedList* pArrayListPassenger, eTipo tipos[], eEs
 	return todoOk;
 }
 
-/** \brief Guarda los datos de los pasajeros en el archivo data.csv (modo texto).
- *
- * \param path char*
- * \param pArrayListPassenger LinkedList*
- * \return int
- *
- */
 int controller_saveAsText(char* path , LinkedList* pArrayListPassenger, eTipo tipos[], eEstado estados[], int tamT, int tamE)
 {
     int todoOk=-1;
@@ -338,19 +286,13 @@ int controller_saveAsText(char* path , LinkedList* pArrayListPassenger, eTipo ti
     			obtenerDescripcionPorIdEstado(estados, tamE, aux->estadoVuelo, estadoVueloStr);
     			fprintf(pFile,"%d,%s,%s,%0.f,%s,%s,%s\n",aux->id, aux->nombre, aux->apellido, aux->precio, aux->codigoVuelo, tipoPasajeroStr, estadoVueloStr);
     		}
+    		todoOk=0;
     	}
     	fclose(pFile);
     }
     return todoOk;
 }
 
-/** \brief Guarda los datos de los pasajeros en el archivo data.csv (modo binario).
- *
- * \param path char*
- * \param pArrayListPassenger LinkedList*
- * \return int
- *
- */
 int controller_saveAsBinary(char* path , LinkedList* pArrayListPassenger)
 {
     int todoOk=-1;
@@ -409,6 +351,41 @@ int controller_findIndexById(LinkedList* pArrayListPassenger, int id){
 				break;
 			}
 		}
+	}
+	return todoOk;
+}
+int controller_liberarMemoria(LinkedList* pArrayListPassenger){
+	int todoOk=-1;
+	if(pArrayListPassenger!=NULL){
+		controller_limpiarElementos(pArrayListPassenger);
+		ll_deleteLinkedList(pArrayListPassenger);
+		todoOk=0;
+	}
+	return todoOk;
+}
+char controller_BorrarYCargar(LinkedList* pArrayListPassenger){
+	char aux='s';
+	if(pArrayListPassenger!=NULL){
+		if(!ll_isEmpty(pArrayListPassenger)){
+				printf("ADVERTENCIA.\nESTA POR CARGAR NUEVO ARCHIVO.\nSe borraran los datos existentes en el programa.\n");
+				cargarValidarCharEntreDos("Confirme la nueva carga(s/n)",&aux,'s','n');
+				if(aux=='s'){
+					controller_limpiarElementos(pArrayListPassenger);
+					ll_clear(pArrayListPassenger);
+				}
+			}
+	}
+	return aux;
+}
+int controller_limpiarElementos(LinkedList* pArrayListPassenger){
+	int todoOk=-1;
+	int len;
+	if(pArrayListPassenger!=NULL){
+		len=ll_len(pArrayListPassenger);
+		for (int i=0;i<len;i++){
+			free((Passenger*)ll_get(pArrayListPassenger,i));
+		}
+		todoOk=0;
 	}
 	return todoOk;
 }
