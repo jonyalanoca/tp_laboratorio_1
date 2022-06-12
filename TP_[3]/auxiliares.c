@@ -5,9 +5,9 @@
  *      Author: Jony
  */
 
+#include "auxiliares.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "otros.h"
 #include <ctype.h>
 #include <time.h>
 

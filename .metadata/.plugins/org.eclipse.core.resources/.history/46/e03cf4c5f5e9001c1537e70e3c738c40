@@ -1,12 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
+#include "auxiliares.h"
 #include "LinkedList.h"
 #include "Controller.h"
 #include "Passenger.h"
 
-#include "auxiliares.h"
 #include "Tipo.h"
 #include "Estado.h"
 #include "menus.h"

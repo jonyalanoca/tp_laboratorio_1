@@ -66,6 +66,7 @@ int controller_addPassenger(LinkedList* pArrayListPassenger, eTipo tipos[], eEst
     	system("cls");
     	controller_showHeadList();
     	mostrarPasajero(aux, tipos, estados,tamT, tamE);
+    	printf("----------------------------------------------------------------------------------------\n");
     	cargarValidarCharEntreDos("Confirme para guardar el registro (s/n)",&opcion,'s','n');
     	if(opcion=='s'){
     		ll_add(pArrayListPassenger,aux);
@@ -171,6 +172,7 @@ int controller_removePassenger(LinkedList* pArrayListPassenger, eTipo tipos[], e
 			system("cls");
 			controller_showHeadList();
 			mostrarPasajero(aux, tipos, estados,tamT, tamE);
+			printf("----------------------------------------------------------------------------------------\n");
 			cargarValidarCharEntreDos("Confirme para borrar el registro (s/n)",&opcion,'s','n');
 			if(opcion=='s'){
 				ll_remove(pArrayListPassenger,auxIndex);
@@ -198,6 +200,7 @@ int controller_ListPassenger(LinkedList* pArrayListPassenger, eTipo tipos[], eEs
 			aux=(Passenger*)ll_get(pArrayListPassenger, i);
 			mostrarPasajero(aux, tipos, estados, tamT, tamE);
 		}
+		printf("----------------------------------------------------------------------------------------\n");
 		todoOk=0;
 	}
 	return todoOk;

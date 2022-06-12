@@ -9,7 +9,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "otros.h"
+
+#include "auxiliares.h"
 #include "validaciones.h"
 
 Passenger* Passenger_new(){
@@ -197,7 +198,7 @@ void mostrarPasajero(Passenger* pasajero, eTipo tipos[], eEstado estados[], int 
 	Passenger_getEstadoVuelo(pasajero, &aux);
 	obtenerDescripcionPorIdEstado(estados, tamE, aux, statusFlight);
 	printf("| %4d | %-11s | %-10s | $%8.2f | %7s | %-14s | %-11s |\n",id, name, lastName, price, flyCode, typePassenger, statusFlight);
-	printf("----------------------------------------------------------------------------------------\n");
+
 }
 int Passenger_modificarNombre(Passenger* pasajero){
 	int todoOk=-1;

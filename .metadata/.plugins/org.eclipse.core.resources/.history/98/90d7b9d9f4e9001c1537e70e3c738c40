@@ -1,14 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-
 #include "LinkedList.h"
 #include "Controller.h"
 #include "Passenger.h"
 
-#include "auxiliares.h"
 #include "Tipo.h"
 #include "Estado.h"
+#include "otros.h"
 #include "menus.h"
 #define TAM_TIPO 3
 #define TAM_ESTADO 4
@@ -41,7 +39,7 @@ int main()
 					if(!controller_loadFromBinary("data.bin",listaPasajeros)){
 						printf("Se cargaron los datos con exito.\n");
 					}else{
-						printf("Hubo en error en las validaciones. O Archivo bin no existe\n");
+						printf("Hubo en error en las validaciones.\n");
 					}
 				}
 				break;
