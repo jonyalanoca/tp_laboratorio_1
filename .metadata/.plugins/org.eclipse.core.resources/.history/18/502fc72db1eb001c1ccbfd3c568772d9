@@ -1,0 +1,11 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int parser_cargarTexto(FILE* pFile, LinkedList* listaCPU){
+	int todoOk=-1;
+	if(pfile!=NULL && listaCPU!=NULL){
+		fscanf(pFile,"%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^\n]\n")
+		todoOk=0;
+	}
+	return todoOk;
+}

@@ -20,7 +20,7 @@ int parser_PassengerFromText(FILE* pFile , LinkedList* pArrayListPassenger,eTipo
 	Passenger* aux=NULL;
 	char matriz[7][100];
 	if(pFile!=NULL && pArrayListPassenger!=NULL){
-		fscanf(pFile,"%[^,],%[^,],%[^,],%[^\n],%[^\n],%[^\n],%[^\n]\n",matriz[0],matriz[1],matriz[2],matriz[3],matriz[4],matriz[5],matriz[6]);
+		fscanf(pFile,"%[^,],%[^,],%[^,],%[^\n],%[^\n],%[^\n],%[^\n]",matriz[0],matriz[1],matriz[2],matriz[3],matriz[4],matriz[5],matriz[6]);
 		while(!feof(pFile)){
 			cant=fscanf(pFile,"%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^\n]\n",matriz[0],matriz[1],matriz[2],matriz[3],matriz[4],matriz[5],matriz[6]);
 			if(cant<7){

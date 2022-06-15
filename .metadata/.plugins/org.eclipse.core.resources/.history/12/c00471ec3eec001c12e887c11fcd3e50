@@ -1,0 +1,91 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "cpus.h"
+#include "auxiliares.h"
+
+eCPU* cpu_nuevo(void){
+	eCPU* aux=(eCPU*)malloc(sizeof(eCPU));
+	verificarNULL(aux);
+	return aux;
+}
+eCPU* cpu_nuevoParametros(char* rank, char* fabricante, char* procesador, char* cache, char* frecuencia, char* zocalos, char* nucleos, char* hilos, char* lanzamiento){
+	eCPU* auxNuevoCPU=cpu_nuevo();
+	if(rank!=NULL && fabricante!=NULL && procesador!=NULL && cache!=NULL && frecuencia!=NULL && zocalos!=NULL && nucleos!=NULL && hilos!=NULL && lanzamiento!=NULL){
+
+	}
+	return  auxNuevoCPU;
+}
+int cpu_setRank(eCPU* pEstructura, int rank){
+	int todoOk=-1;
+	if(pEstructura!=NULL &&rank >0){
+		pEstructura->rank=rank;
+		todoOk=0;
+	}
+	return todoOk;
+}
+int cpu_setFabricante(eCPU* pEstructura, char* fabricante){
+	int todoOk=-1;
+	if(pEstructura!=NULL && fabricante!=NULL){
+		strcpy(pEstructura->fabricante,fabricante);
+		todoOk=0;
+	}
+	return todoOk;
+}
+int cpu_setProcesador(eCPU* pEstructura, char* procesador){
+	int todoOk=-1;
+	if(pEstructura!=NULL && procesador!=NULL){
+		strcpy(pEstructura->procesador,procesador);
+		todoOk=0;
+	}
+	return todoOk;
+}
+int cpu_setCache(eCPU* pEstructura, int cache){
+	int todoOk=-1;
+	if(pEstructura!=NULL &&cache >0){
+		pEstructura->cache=cache;
+		todoOk=0;
+	}
+	return todoOk;
+}
+int cpu_setFrecuencia(eCPU* pEstructura, float frecuencia){
+	int todoOk=-1;
+	if(pEstructura!=NULL &&frecuencia >0){
+		pEstructura->frecuencia=frecuencia;
+		todoOk=0;
+	}
+	return todoOk;
+}
+int cpu_setZocalos(eCPU* pEstructura, char* zocalos){
+	int todoOk=-1;
+	if(pEstructura!=NULL && zocalos!=NULL){
+		strcpy(pEstructura->zocalos,zocalos);
+		todoOk=0;
+	}
+	return todoOk;
+}
+
+int cpu_setNucleos(eCPU* pEstructura, int nucleos){
+	int todoOk=-1;
+	if(pEstructura!=NULL &&nucleos >0){
+		pEstructura->nucleos=nucleos;
+		todoOk=0;
+	}
+	return todoOk;
+}
+int cpu_setHilos(eCPU* pEstructura, int hilos){
+	int todoOk=-1;
+	if(pEstructura!=NULL &&hilos >0){
+		pEstructura->hilos=hilos;
+		todoOk=0;
+	}
+	return todoOk;
+}
+int cpu_setLanzameinto(eCPU* pEstructura, int lanzamiento){
+	int todoOk=-1;
+	if(pEstructura!=NULL &&lanzamiento >0){
+		pEstructura->nucleos=nucleos;
+		todoOk=0;
+	}
+	return todoOk;
+}

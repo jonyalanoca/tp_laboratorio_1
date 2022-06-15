@@ -1,0 +1,14 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "cpus.h"
+#include "auxiliares.h"
+
+eCPU* cpu_nuevo(void){
+	eCPU* aux=(eCPU*)malloc(sizeof(eCPU));
+	verificarNULL(aux);
+	return aux;
+}
+eCPU* cpu_nuevoParametros(char* rank, char* fabricante, char* procesador, char* cache, char* frecuencia, char* zacalos, char* nucleos, char* hilos, char* lazamiento){
+
+}
+

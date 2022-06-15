@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "parser.h"
+int parser_cargarTexto(FILE* pFile, LinkedList* listaCPU){
+	int todoOk=-1;
+	char matriz[9][100];
+	int cant;
+	if(pFile!=NULL && listaCPU!=NULL){
+
+		fscanf(pFile,"%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%s\n",matriz[0],matriz[1],matriz[2],matriz[3],matriz[4],matriz[5],matriz[6],matriz[7],matriz[8]);
+		while(!feof(pFile)){
+			cant=fscanf(pFile,"%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%s\n",matriz[0],matriz[1],matriz[2],matriz[3],matriz[4],matriz[5],matriz[6],matriz[7],matriz[8]);
+			if(cant<9){
+				break;
+			}
+			printf("%3s %5s %30s %10s %10s %10s %10s %10s %10s\n",matriz[0],matriz[1],matriz[2],matriz[3],matriz[4],matriz[5],matriz[6],matriz[7],matriz[8]);
+		}
+		todoOk=0;
+	}
+	return todoOk;
+}

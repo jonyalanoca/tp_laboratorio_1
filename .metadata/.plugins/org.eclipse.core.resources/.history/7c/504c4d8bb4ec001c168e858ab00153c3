@@ -1,0 +1,117 @@
+/*
+    utest example : Unit test examples.
+    Copyright (C) <2018>  <Mauricio Davila>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "../testing/inc/main_test.h"
+#include "../inc/LinkedList.h"
+
+#include "menus.h"
+#include "controller.h"
+#include "auxiliares.h"
+
+
+int main(void)
+{
+	setbuf(stdout,NULL);
+	LinkedList* listaCPU=ll_newLinkedList();
+	LinkedList* Clonlista=NULL;
+	LinkedList* Clonlista10=NULL;
+	int id=500;
+	char salir;
+	do{
+		switch(menu())
+		{
+			case 1:
+				controller_cargarArchivoTexto("rankCPU.csv", listaCPU);//
+				break;
+			case 2:
+				controller_tamanioLista(listaCPU);
+				break;
+			case 3:
+				controller_agregarAlFinal(listaCPU, &id);
+				break;
+			case 4:
+				controller_insertarReemplazarCPU(listaCPU, &id);
+				break;
+			case 5:
+				controller_insertarSinReemplazarCPU(listaCPU,&id);
+				break;
+			case 6:
+				controller_obtenerIndex(listaCPU);
+				break;
+			case 7:
+				controller_listarCPUs(listaCPU);
+				break;
+			case 8:
+
+				break;
+			case 9:
+
+				controller_clonarLista(listaCPU,Clonlista);
+				break;
+			case 10:
+				if(!cerrar(&salir)){
+					printf("Hubo un problema con la validacion.\n");
+				}else{
+					controller_limpiarElementos(listaCPU);
+					ll_deleteLinkedList(listaCPU);
+				}
+				break;
+		}
+		system("pause");
+		system("cls");
+	}while(salir!='s');
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

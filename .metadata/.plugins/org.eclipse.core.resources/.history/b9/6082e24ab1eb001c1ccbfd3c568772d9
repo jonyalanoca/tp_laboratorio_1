@@ -1,0 +1,16 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "paser.h"
+controller_cargarArchivoTexto(char* path,LinkedList* listaCPU){
+	int todoOk=-1;
+	if(path!=NULL && listaCPU!=NULL){
+		FILE* pFile=fopen(path, "r");
+		if(pFile!=NULL){
+
+		}
+		fclose(pFile);
+		todoOk=0;
+	}
+	return todoOk;
+}

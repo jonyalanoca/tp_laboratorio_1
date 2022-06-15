@@ -23,62 +23,189 @@
 #include "../testing/inc/main_test.h"
 #include "../inc/LinkedList.h"
 
+#include "menus.h"
+#include "controller.h"
+#include "auxiliares.h"
+#include "cpus.h"
+
 
 int main(void)
 {
 	setbuf(stdout,NULL);
-	startTesting(1);  // ll_newLinkedList
-	startTesting(2);  // ll_len
-	startTesting(3);  // getNode - test_getNode
-	startTesting(4);  // addNode - test_addNode
-	startTesting(5);  // ll_add
-	startTesting(6);  // ll_get
-	startTesting(7);  // ll_set
-	startTesting(8);  // ll_remove
-	startTesting(9);  // ll_clear
-	startTesting(10); // ll_deleteLinkedList
-	startTesting(11); // ll_indexOf
-	startTesting(12); // ll_isEmpty
-	startTesting(13); // ll_push
-	startTesting(14); // ll_pop
-	startTesting(15); // ll_contains
-	startTesting(16); // ll_containsAll
-	startTesting(17); // ll_subList
-	startTesting(18); // ll_clone
-	startTesting(19); // ll_sort
+	LinkedList* listaCPU=ll_newLinkedList();
+	LinkedList* clonlista=NULL;
+	LinkedList* clonlista10=NULL;
+	int id=500;
+	char salir;
+	do{
+		switch(menu())
+		{
+			case 1:
+				controller_cargarArchivoTexto("rankCPU.csv", listaCPU);
+				break;
+			case 2:
+				controller_agregarAlFinal(listaCPU, &id);
+				break;
+			case 3:
+				if(ll_isEmpty(listaCPU)==0){
+					controller_tamanioLista(listaCPU);
+				}else{
+					printf("Antes debe cargar datos (1)(2).\n");
+				}
+				break;
+			case 4:
+				if(ll_isEmpty(listaCPU)==0){
+					controller_insertarReemplazarCPU(listaCPU, &id);
+				}else{
+					printf("Antes debe cargar datos (1)(2).\n");
+				}
+
+				break;
+			case 5:
+				if(ll_isEmpty(listaCPU)==0){
+					controller_insertarSinReemplazarCPU(listaCPU,&id);
+				}else{
+					printf("Antes debe cargar datos (1)(2).\n");
+				}
+
+				break;
+			case 6:
+				if(ll_isEmpty(listaCPU)==0){
+					controller_obtenerIndex(listaCPU);
+				}else{
+					printf("Antes debe cargar datos (1)(2).\n");
+				}
+				break;
+			case 7:
+				if(ll_isEmpty(listaCPU)==0){
+					if(!ll_sort(listaCPU,compararPorId,ascendenteDescendente())){
+						printf("Uff! Costo, pero lo logramos. Se Ordeno la lista con exito.\n");
+					}else{
+						printf("Ocurrio un problema al ordenar.\n");
+					}
+				}else{
+					printf("Antes debe cargar datos (1)(2).\n");
+				}
+
+				break;
+			case 8:
+				if(ll_isEmpty(listaCPU)==0){
+					if(!ll_sort(listaCPU,compararPorProcesador,ascendenteDescendente())){
+						printf("Uff! Costo, pero lo logramos. Se Ordeno la lista con exito.\n");
+					}else{
+						printf("Ocurrio un problema al ordenar.\n");
+					}
+				}else{
+					printf("Antes debe cargar datos (1)(2).\n");
+				}
+
+				break;
+			case 9:
+				if(ll_isEmpty(listaCPU)==0){
+					controller_listarCPUs(listaCPU);
+				}else{
+					printf("Antes debe cargar datos (1)(2).\n");
+				}
+
+				break;
+			case 10:
+				if(ll_isEmpty(listaCPU)==0){
+					controller_guardarComoTexto("rankCPU.csv",listaCPU);
+				}else{
+					printf("Antes debe cargar datos (1)(2).\n");
+				}
+
+				break;
+			case 11:
+				if(ll_isEmpty(listaCPU)==0){
+					clonlista=ll_clone(listaCPU);
+					if(clonlista!=NULL){
+						printf("Se clono la lista con exito.\n");
+					}
+				}else{
+					printf("Antes debe cargar datos (1)(2).\n");
+				}
+
+				break;
+			case 12:
+				if(ll_isEmpty(clonlista)==0){
+					controller_listarCPUs(clonlista);
+				}else{
+					printf("Antes debe cargar datos (11).\n");
+				}
+
+				break;
+			case 13:
+				if(ll_isEmpty(clonlista)==0){
+					controller_comprarListas(clonlista,listaCPU);
+				}else{
+					printf("Antes debe cargar datos (11).\n");
+				}
+
+				break;
+			case 14:
+				if(ll_isEmpty(clonlista)==0){
+					controller_compararUnElemento(listaCPU,clonlista);
+				}else{
+					printf("Antes debe cargar datos (11).\n");
+				}
+				break;
+			case 15:
+				if(ll_isEmpty(clonlista)==0){
+					controller_eliminarUnElemento(clonlista);
+				}else{
+					printf("Antes debe cargar datos (11).\n");
+				}
+
+				break;
+			case 16:
+				if(ll_isEmpty(listaCPU)==0){
+					clonlista10=ll_subList(listaCPU, 0,10);
+					if(clonlista10!=NULL){
+						printf("Se clono la lista con exito.\n");
+					}
+				}else{
+					printf("Antes debe cargar datos (1)(2).\n");
+				}
+
+				break;
+			case 17:
+				if(ll_isEmpty(clonlista10)==0){
+					controller_listarCPUs(clonlista10);
+				}else{
+					printf("Antes debe cargar datos (16).\n");
+				}
+				break;
+			case 18:
+				if(ll_isEmpty(clonlista10)==0){
+					controller_limpiarListaClon10(clonlista10);
+				}else{
+					printf("Antes debe cargar datos (16).\n");
+				}
+				break;
+			case 19:
+				if(ll_isEmpty(clonlista10)==0){
+					controller_eliminarElementoYAgregarloAlPrincipal(listaCPU,clonlista10,id);
+				}else{
+					printf("Antes debe cargar datos (16).\n");
+				}
+				break;
+			case 20:
+				if(!cerrar(&salir)){
+					printf("Hubo un problema con la validacion.\n");
+				}else{
+					controller_limpiarElementos(listaCPU);
+					ll_deleteLinkedList(listaCPU);
+					controller_limpiarElementos(clonlista);
+					ll_deleteLinkedList(clonlista);
+					controller_limpiarElementos(clonlista10);
+					ll_deleteLinkedList(clonlista10);
+				}
+				break;
+		}
+		system("pause");
+		system("cls");
+	}while(salir!='s');
 
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

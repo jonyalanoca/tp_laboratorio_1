@@ -1,0 +1,34 @@
+/*
+ * cpus.h
+ *
+ *  Created on: 14 jun. 2022
+ *      Author: Jony
+ */
+
+#ifndef SRC_CPUS_H_
+#define SRC_CPUS_H_
+typedef struct{
+	int rank;
+	char fabricante[10];
+	char procesador[30];
+	int cache;
+	float frecuencia;
+	char zocalos[10];
+	int nucleos;
+	int hilos;
+	int lanzamiento;
+}eCPU;
+#endif /* SRC_CPUS_H_ */
+eCPU* cpu_nuevo(void);
+eCPU* cpu_nuevoParametros(char* rank, char* fabricante, char* procesador, char* cache, char* frecuencia, char* zocalos, char* nucleos, char* hilos, char* lanzamiento);
+int cpu_setRank(eCPU* pEstructura, int rank);
+int cpu_setFabricante(eCPU* pEstructura, char* fabricante);
+int cpu_setProcesador(eCPU* pEstructura, char* procesador);
+int cpu_setCache(eCPU* pEstructura, int cache);
+int cpu_setFrecuencia(eCPU* pEstructura, float frecuencia);
+int cpu_setZocalos(eCPU* pEstructura, char* zocalos);
+int cpu_setNucleos(eCPU* pEstructura, int nucleos);
+int cpu_setHilos(eCPU* pEstructura, int hilos);
+int cpu_setLanzameinto(eCPU* pEstructura, int lanzamiento);
+
+void mostrarCPU(eCPU* eEstructura);
