@@ -38,10 +38,10 @@ int menu(void){
 	printf("  [20] FITRAR POR AMD EN UNA LISTA NUEVA.\n");
 	printf("  [21] MOSTRAR LISTA FILTRADA.\n");
 	printf("-----------------------------------------------------------------------------\n");
-	printf("  [22] SALIR.\n");
+	printf("  [20] SALIR.\n");
 	printf("-----------------------------------------------------------------------------\n");
 
-	if(!enteroEnRango("Ingrese una opciones del menu",&opcion,1,22)){
+	if(!enteroEnRango("Ingrese una opciones del menu",&opcion,1,20)){
 		printf("Algo ha salido mal.\n");
 	}
 	return opcion;

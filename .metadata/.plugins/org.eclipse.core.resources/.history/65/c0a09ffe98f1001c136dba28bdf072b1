@@ -490,22 +490,22 @@ int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
     return returnAux;
 }
 /// @fn LinkedList ll_filter*(LinkedList*, int(*)(void*))
-/// @brief  filta los elementos de linked list
+/// @brief  Recorre el linkedlist original y se lo pasa a la funcion pasado por parametr, si esta devuelve 1, se lo agrega a un nuevo linkedList
 ///
-/// @param this linked list a filtrar
-/// @param pFunc puntero a la funcion que filtra
-/// @return retorna un nuevo puntero  a linkedList con los elementos que pasaron la funcion.
+/// @param this
+/// @param pFunc
+/// @return
 LinkedList* ll_filter(LinkedList* this, int (*pFunc)(void*)){
 	LinkedList* auxLinkedList=NULL;
 	if(this!=NULL && pFunc!=NULL){
-		auxLinkedList=ll_newLinkedList(); 				//El nuevo linkedList que tendra los elementos filtrados
-		int tam=ll_len(this); 							//Obtenemos el tamanio
-		for(int i=0;i<tam;i++){							//Recorremos el linkedList
-			if(pFunc(ll_get(this,i))){					//Si la funcion devuelve 1 (Valida la condicion)..
-				ll_add(auxLinkedList,ll_get(this,i));	//Lo agregamos el nuevo linkedList
+		auxLinkedList=ll_newLinkedList();
+		int tam=ll_len(this);
+		for(int i=0;i<tam;i++){
+			if(pFunc(ll_get(this,i))){
+				ll_add(auxLinkedList,ll_get(this,i));
 			}
 		}
 	}
-	return auxLinkedList;								//Se retorna el nuevo linkedList filtrado.
+	return auxLinkedList;
 }
 

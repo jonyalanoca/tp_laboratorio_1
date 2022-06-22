@@ -111,16 +111,15 @@ int cpu_setHilos(eCPU* pEstructura, int hilos);
 /// 		retorna  0: si todo salio bien
 int cpu_setLanzamiento(eCPU* pEstructura, int lanzamiento);
 /// @fn int compararPorId(void*, void*)
-/// @brief compara dos valores y el resultado lo retorna al final
+/// @brief
 ///
 /// @param cpu1
 /// @param cpu2
-/// @return retorna  0: si fallo la verificaion NULL o si son iguales
-/// 		retorna -1: si si el primer valor es mayor que el primero.
-/// 		retorna  1: si si el segundo valor es mayor que el  primero.
+/// @return retorna -1: si falla la validacion NULL
+/// 		retorna  0: si todo salio bien
 int compararPorId(void* cpu1, void* cpu2);
 /// @fn int compararPorProcesador(void*, void*)
-/// @brief	compara dos valores y el resultado lo retorna al final
+/// @brief
 ///
 /// @param cpu1
 /// @param cpu2
@@ -128,15 +127,6 @@ int compararPorId(void* cpu1, void* cpu2);
 /// 		retorna -1: si si la primera cadena es mayor que la segunda
 /// 		retorna  1: si si la sugunda cadena es mayor que la primera
 int compararPorProcesador(void* cpu1, void* cpu2);
-/// @fn int filtrarPorAMD(void*)
-/// @brief compara los el valor fabricante de la estructura con "AMD" y el resultado lo retorna al final
-///
-/// @param pEstructura
-/// @return retorna  0: si fallo la verificaion NULL o  no hubo coincidencia
-/// 		retorna  1: hubo coincidencia.
 int filtrarPorAMD(void* pEstructura);
-/// @fn void mostrarCPU(eCPU*)
-/// @brief muestra en forma enculumnada los valores de la estructura.
-///
-/// @param eEstructura
+
 void mostrarCPU(eCPU* eEstructura);

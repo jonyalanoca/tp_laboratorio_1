@@ -35,7 +35,6 @@ int main(void)
 	LinkedList* listaCPU=ll_newLinkedList();
 	LinkedList* clonlista=NULL;
 	LinkedList* clonlista10=NULL;
-	LinkedList* clonFiltrado=NULL;
 	int id=500;
 	char salir;
 	do{
@@ -192,20 +191,6 @@ int main(void)
 				}
 				break;
 			case 20:
-				if(ll_isEmpty(listaCPU)==0){
-				clonFiltrado=ll_filter(listaCPU,filtrarPorAMD);
-				}else{
-					printf("Antes debe cargar datos (16).\n");
-				}
-				break;
-			case 21:
-				if(ll_isEmpty(clonFiltrado)==0){
-					controller_listarCPUs(clonFiltrado);
-				}else{
-					printf("Antes debe cargar datos (16).\n");
-				}
-				break;
-			case 22:
 				if(!cerrar(&salir)){
 					printf("Hubo un problema con la validacion.\n");
 				}else{
@@ -215,9 +200,6 @@ int main(void)
 					ll_deleteLinkedList(clonlista);
 					controller_limpiarElementos(clonlista10);
 					ll_deleteLinkedList(clonlista10);
-					controller_limpiarElementos(clonFiltrado);
-					ll_deleteLinkedList(clonFiltrado);
-
 				}
 				break;
 		}

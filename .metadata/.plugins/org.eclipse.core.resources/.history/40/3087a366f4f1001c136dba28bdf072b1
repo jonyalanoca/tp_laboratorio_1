@@ -268,4 +268,3 @@ int controller_guardarComoTexto(char* path, LinkedList* listaCPUs){
 	}
 	return todoOk;
 }
-

@@ -125,7 +125,7 @@ int compararPorProcesador(void* cpu1, void* cpu2){
 	}
 	return auxReturn;
 }
-int filtrarPorAMD(void* pEstructura){
+int filtrarPorAMD(eCPU* pEstructura){
 	int resultado=0;
 	if(pEstructura!=NULL){
 		if(strcmp(((eCPU*)pEstructura)->fabricante,"AMD")==0){
